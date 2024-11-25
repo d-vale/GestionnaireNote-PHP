@@ -13,3 +13,7 @@ Technologies Used
 
     Vanilla PHP
     Tailwind CSS
+    
+## Run application in development mode
+1. clone this repository
+2. 
