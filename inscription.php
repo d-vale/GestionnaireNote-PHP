@@ -48,7 +48,6 @@
                 <!-- Boutons à droite -->
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <a href="./connection.php" class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">Se connecter</a>
-                    <a href="./inscription.php" class="rounded-full -md bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm font-medium text-white">S'inscrire</a>
                 </div>
             </div>
         </nav>
@@ -63,47 +62,10 @@
 
     <!-- Contenue du Main -->
     <main class="flex-grow bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
-        <div class="flex items-center justify-center">
-            <section class="bg-cover bg-center py-32 w-full" style="background-image: url('https://source.unsplash.com/random');">
-                <div class="container mx-auto text-center text-black max-w-7xl px-2 sm:px-6 lg:px-8">
-                    <div class="flex flex-col md:flex-row items-center justify-center gap-8">
-                        <div class="text-center md:text-left">
-                            <h1 class="text-5xl mb-6 font-bold">Votre gestionnaire de notes</h1>
-                            <p class="text-xl mb-12">Grâce à ce site, suivez votre avancée dans l'année scolaire, répertoriez vos notes et calculez vos moyennes.</p>
-                            <div class="flex flex-col md:flex-row gap-4">
-                                <a href="./inscription.php" class="bg-blue-800 text-white py-4 px-12 rounded-full hover:bg-blue-900">S'inscrire</a>
-                                <a href="./connection.php" class="text-black py-4 px-12 rounded-full hover:text-blue-900">Déjà inscrit ? Se connecter</a>
-                            </div>
-                        </div>
-                        <div>
-                            <img src="https://www.hes-so.ch/fileadmin/_processed_/8/b/csm_heig-vd-batiment_47d3b6488c.jpg" class="h-64 w-full object-cover rounded-xl" alt="Layout Image">
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    <h1 class="text-center text-4xl mb-12 text-blue-800 font-bold">
-        Les statistiques de nos utilisateurs et utilisatrices
-    </h1>
-    <div class="py-12 sm:py-16 w-full">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 text-center">
-                <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                    <dd class=" forder-first text-5xl font-semibold tracking-tight text-gray-900 ">24</dd>
-                    <dt class="text-base text-gray-600">Nombre d'utilisateurs inscrits</dt>
-                </div>
-                <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                    <dd class="order-first text-5xl font-semibold tracking-tight text-gray-900 ">5.2</dd>
-                    <dt class="text-base text-gray-600">Moyenne globale</dt>
-                </div>
-                <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                    <dd class="order-first text-5xl font-semibold tracking-tight text-gray-900">75%</dd>
-                    <dt class="text-base text-gray-600">Taux de réussite des évaluations</dt>
-                </div>
-            </dl>
-        </div>
-    </div>
-</div>
+        <div class="pt-6 flex items-center justify-center grid grid-cols-1 ">
+            <h1 class="pt-6 text-center text-5xl mb-6 font-bold">Inscrivez-vous à la plateforme</h1>
+            <p class="text-center">Répertoriez vos notes dès maintenant dans votre profil personnalisé après à une inscription simple et efficace.</p>
+        </div>  
 
     </main>
 
