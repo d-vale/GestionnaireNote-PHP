@@ -34,7 +34,9 @@
                 <!-- Logo et liens -->
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="hidden sm:flex shrink-0 items-center">
-                        <img class="h-8 w-auto" src="./assets/logo.svg" alt="Logo de notre projet">
+                        <a href="./">
+                            <img class="h-8 w-auto" src="./assets/logo.svg" alt="Logo de notre projet">
+                        </a>
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
@@ -56,7 +58,7 @@
         <!-- Menu Mobile  -->
         <div id="mobile-menu" class="sm:hidden hidden">
             <div class="space-y-1 px-2 pt-2 pb-3">
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium hover:text-blue-800">À quoi sert ce site ?</a>
+                <a href="./about.php" class="block rounded-md px-3 py-2 text-base font-medium hover:text-blue-800">À quoi sert ce site ?</a>
             </div>
         </div>
     </header>
