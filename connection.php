@@ -64,25 +64,59 @@
         <!-- Menu Mobile  -->
         <div id="mobile-menu" class="sm:hidden hidden">
             <div class="space-y-1 px-2 pt-2 pb-3">
-                <a href="./about.php" class="block rounded-md px-3 py-2 text-base font-medium hover:text-blue-800">À
-                    quoi sert ce site ?</a>
+                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium hover:text-blue-800">À quoi sert ce
+                    site ?</a>
                 <a href="./" class="block rounded-md px-3 py-2 text-base font-medium hover:text-blue-800">Accueil</a>
             </div>
         </div>
     </header>
 
-    <!-- Contenue du Main -->
-    <main class="flex-grow bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
-        <div class="pt-6 flex items-center justify-center grid grid-cols-1 ">
-            <h1 class="pt-6 text-center text-5xl mb-6 font-bold">Connection</h1>
-            <p class="text-center">Connectez-vous à votre compte</p>
+    <!-- Contenu du Main -->
+    <main class="mb-20 flex-grow bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+
+        <div class="mt-24  flex flex-col">
+            <h1 class="pt-6 text-center text-5xl mb-6 font-bold">Connectez-vous !</h1>
+            <p class="pt-6 text-center">Afin d'accéder à vos résultats et vos moyennes. </p>
+        </div>
+
+        <!-- Formulaire -->
+        <div class="mt-24 flex flex-col items-center" style="margin-bottom: 5rem;">
+
+            <form action="" method="" class="mb-24 flex flex-col items-center gap-4 ">
+
+                <div class="grid grid-cols-2 gap-4 md:grid-cols-1" style="margin-bottom:  5rem;">
+                    <div>
+                        <label for="email" class="mb-3 block text-base font-medium">
+                            Adresse mail
+                        </label>
+                        <input type="email" name="email" id="email"
+                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                    </div>
+                    <div>
+                        <label for="password" class="mb-3 block text-base font-medium">
+                            Mot de passe
+                        </label>
+                        <input type="password" name="password" id="password"
+                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                    </div>
+                    
+                </div>
+                <div class="mt-18">
+                <button id="connection"
+                        class="block text-basme font-medium rounded-full -md bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm text-white ">
+                        Se connecter
+                </button>
+                </div>
+            
+            </form>
+
         </div>
 
     </main>
 
 
     <!-- Footer -->
-    <footer class=" bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100 bottom-0">
+    <footer class="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100 bottom-0">
         <div class="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
                 <!-- Première colonne -->
