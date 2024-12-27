@@ -76,9 +76,9 @@
                             style="background-image: url(./assets/profilePicture.jpg)">
                         </div>
                     </div>
-                    <a href="#"
-                        class="row-span-1 rounded-md text-sm font-medium sm:text-black sm:hover:text-blue-900"
-                        aria-label="Modifier le profil"><img src="" alt=""></a>
+                    <a href="./settings.php"
+                        class="underline row-span-1 rounded-md text-sm font-medium  sm:text-black sm:hover:text-blue-900"
+                        aria-label="Modifier le profil">Paramètres</a>
                     <div class="data row-span-3">
                         <div class="name text-lg font-bold mb-4 text-blue-900">John Doe</div>
                         <div class="school">École : HEIG-VD</div>
@@ -94,7 +94,7 @@
                         <div class="averageDisplay font-bold text-xl mt-2">5.3</div>
                     </div>
                     <div class="averageBlock">
-                        <div class="averageTitle text-xlr font-bold text-blue-900">Taux de Réussite Global</div>
+                        <div class="averageTitle text-xl font-bold text-blue-900">Taux de Réussite Global</div>
                         <div class="averageDisplay font-bold text-xl mt-2 ">89%</div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                         </div>
                         <div class="flex flex-col items-center pt-4">
                             <button
-                                class="mt-4 mb-4 block py-2 px-6 rounded-full bg-blue-900 hover:bg-blue-900 text-md text-white font-bold">Ajouter</button>
+                                class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">Ajouter</button>
                         </div>
                     </form>
                 </div>

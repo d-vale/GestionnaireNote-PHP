@@ -83,7 +83,7 @@
                                 répertoriez vos notes et calculez vos moyennes.</p>
                             <div class="flex flex-col md:flex-row gap-4">
                                 <a href="./inscription.php"
-                                    class="bg-blue-800 text-white py-4 px-12 rounded-full hover:bg-blue-900">S'inscrire</a>
+                                    class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">S'inscrire</a>
                                 <a href="./connection.php"
                                     class="text-black py-4 px-12 rounded-full hover:text-blue-900">Déjà inscrit ? Se
                                     connecter</a>

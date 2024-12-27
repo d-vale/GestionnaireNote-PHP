@@ -89,20 +89,19 @@
                             Adresse mail
                         </label>
                         <input type="email" name="email"
-                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                     <div>
                         <label for="password" class="mb-3 block text-base font-medium">
                             Mot de passe
                         </label>
                         <input type="password" name="password"
-                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                     
                 </div>
                 <div class="mt-18">
-                <button id="connection"
-                        class="block text-basme font-medium rounded-full -md bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm text-white ">
+                <button class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">
                         Se connecter
                 </button>
                 </div>

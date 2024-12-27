@@ -91,7 +91,7 @@
                             Prénom
                         </label>
                         <input type="text" name="firstname" id="firstname"
-                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
 
                     <div>
@@ -99,7 +99,7 @@
                             Nom
                         </label>
                         <input type="text" name="name" id="name"
-                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white  text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
 
                     <div>
@@ -107,7 +107,7 @@
                             École
                         </label>
                         <input type="text" name="school" id="school"
-                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
 
                     <div>
@@ -115,7 +115,7 @@
                             Filière
                         </label>
                         <input type="text" name="sector"
-                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white  text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
 
                     <div>
@@ -123,13 +123,13 @@
                             Classe
                         </label>
                         <input type="text" name="class" id="class"
-                            class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                     <div>
                         <label for="language" class="mb-3 block text-base font-medium">
                             Langue de préférence
                         </label>
-                        <select name="language" id="language" class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
+                        <select name="language" id="language" class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
                             <option class="font-light"selected>Choisir une langue</option>
                             <option value="french">Français</option>
                             <option value="english">Anglais</option>
@@ -140,20 +140,20 @@
                             Adresse mail
                         </label>
                         <input type="email" name="email"
-                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-whitetext-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                     <div>
                         <label for="password" class="mb-3 block text-base font-medium">
                             Mot de passe
                         </label>
                         <input type="password" name="password" 
-                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                     
                 </div>
                 <div class="mt-18">
                 <button id="subscribe"
-                        class="block text-basme font-medium rounded-full bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm text-white ">
+                        class="block text-basme font-medium rounded-full bg-blue-900 hover:bg-black text-lg text-white p-3">
                         S'inscrire
                 </button>
                 </div>
