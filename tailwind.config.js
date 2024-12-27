@@ -1,13 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./*.php","./*.html","./*.js"
+  content: [ 
+    "./profil.php",   
+    "./connection.php",   
+    "./index.php",  
+    "./inscription.php",   
+    "./about.php",   
+
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'hero-pattern': "url('/assets/space.jpeg')",
-      }
     },
   },
   plugins: [

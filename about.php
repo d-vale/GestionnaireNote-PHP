@@ -45,9 +45,8 @@
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
-
-                        <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
-
+                            <a href="./about.php" class="font-medium rounded-md px-3 py-2 text-sm text-blue-900">À quoi
+                                sert ce site ?</a>
                         </div>
                     </div>
                 </div>
@@ -55,8 +54,10 @@
 
                 <!-- Boutons à droite -->
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <a href="./connection.php"
+                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">Se connecter</a>
                     <a href="./inscription.php"
-                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">S'inscrire</a>
+                        class="rounded-full -md bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm font-medium text-white">S'inscrire</a>
                 </div>
             </div>
         </nav>
@@ -64,58 +65,25 @@
         <!-- Menu Mobile  -->
         <div id="mobile-menu" class="sm:hidden hidden">
             <div class="space-y-1 px-2 pt-2 pb-3">
-            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+                <a href="./about.php" class="block rounded-md px-3 py-2 text-base font-medium hover:text-blue-900">À quoi sert
+                    ce site ?</a>
                 <a href="./" class="block rounded-md px-3 py-2 text-base font-medium hover:text-blue-800">Accueil</a>
             </div>
         </div>
     </header>
 
-    <!-- Contenu du Main -->
-    <main class=" flex-grow bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
-
-        <div class="mt-24  flex flex-col">
-            <h1 class="pt-6 text-center text-5xl mb-6 font-bold">Connectez-vous !</h1>
-            <p class="pt-6 text-center">Afin d'accéder à vos résultats et vos moyennes. </p>
-        </div>
-
-        <!-- Formulaire -->
-        <div class="mt-24 flex flex-col items-center" style="margin-bottom: 5rem;">
-
-            <form action="./profil.php" method="" class="mb-24 flex flex-col items-center gap-4 ">
-
-                <div class="grid grid-cols-2 gap-4 md:grid-cols-1" style="margin-bottom:  5rem;">
-                    <div>
-                        <label for="email" class="mb-3 block text-base font-medium">
-                            Adresse mail
-                        </label>
-                        <input type="email" name="email"
-                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                    </div>
-                    <div>
-                        <label for="password" class="mb-3 block text-base font-medium">
-                            Mot de passe
-                        </label>
-                        <input type="password" name="password"
-                            class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                    </div>
-                    
-                </div>
-                <div class="mt-18">
-                <button id="connection"
-                        class="block text-basme font-medium rounded-full -md bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm text-white ">
-                        Se connecter
-                </button>
-                </div>
-            
-            </form>
-
+    <!-- Contenue du Main -->
+    <main class="flex-grow bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+        <div class="pt-6 flex items-center justify-center grid grid-cols-1 ">
+            <h1 class="pt-6 text-center text-5xl mb-6 font-bold">Votre Gestionnaire de notes personnels</h1>
+            <p class="text-center">Ce site vous permet de répertoriez vos notes dans votre profil personnalisé.</p>
         </div>
 
     </main>
 
 
     <!-- Footer -->
-    <footer class="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100 bottom-0">
+    <footer class=" bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100 bottom-0">
         <div class="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
                 <!-- Première colonne -->

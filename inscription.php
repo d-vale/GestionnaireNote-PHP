@@ -72,9 +72,9 @@
     </header>
 
     <!-- Contenu du Main -->
-    <main class="mb-20 flex-grow bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+    <main class="mb-0 flex-grow bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
 
-        <div class="mt-24  flex flex-col">
+        <div class="mt-24 flex flex-col">
             <h1 class="pt-6 text-center text-5xl mb-6 font-bold">Inscrivez-vous à la plateforme</h1>
             <p class="pt-6 text-center">Répertoriez vos notes dès maintenant dans votre profil personnalisé après à une
                 inscription simple et efficace.</p>
@@ -83,9 +83,9 @@
         <!-- Formulaire -->
         <div class="mt-24 flex flex-col items-center" style="margin-bottom: 5rem;">
 
-            <form action="" method="" class="mb-24 flex flex-col items-center gap-4 ">
+            <form action="" method="" class=" flex flex-col items-center ">
 
-                <div class="grid grid-cols-2 gap-4 md:grid-cols-1" style="margin-bottom:  5rem;">
+                <div class="grid md:gap-4 md:grid-cols-2 grid-cols-1" style="margin-bottom:  5rem;">
                     <div>
                         <label for="firstname" class="mb-3 block text-base font-medium">
                             Prénom
@@ -153,7 +153,7 @@
                 </div>
                 <div class="mt-18">
                 <button id="subscribe"
-                        class="block text-basme font-medium rounded-full -md bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm text-white ">
+                        class="block text-basme font-medium rounded-full bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm text-white ">
                         S'inscrire
                 </button>
                 </div>
