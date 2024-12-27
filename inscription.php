@@ -46,8 +46,8 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
 
-                            <a href="./about.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">À
-                                quoi sert ce site ?</a>
+                        <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+
                         </div>
                     </div>
                 </div>
@@ -64,8 +64,8 @@
         <!-- Menu Mobile  -->
         <div id="mobile-menu" class="sm:hidden hidden">
             <div class="space-y-1 px-2 pt-2 pb-3">
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium hover:text-blue-800">À quoi sert ce
-                    site ?</a>
+            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+
                 <a href="./" class="block rounded-md px-3 py-2 text-base font-medium hover:text-blue-800">Accueil</a>
             </div>
         </div>
@@ -114,7 +114,7 @@
                         <label for="sector" class="mb-3 block text-base font-medium">
                             Filière
                         </label>
-                        <input type="text" name="sector" id="sector"
+                        <input type="text" name="sector"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
 
@@ -139,14 +139,14 @@
                         <label for="email" class="mb-3 block text-base font-medium">
                             Adresse mail
                         </label>
-                        <input type="email" name="email" id="email"
+                        <input type="email" name="email"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                     <div>
                         <label for="password" class="mb-3 block text-base font-medium">
                             Mot de passe
                         </label>
-                        <input type="password" name="password" id="password"
+                        <input type="password" name="password" 
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                     

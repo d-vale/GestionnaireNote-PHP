@@ -45,10 +45,9 @@
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
-
-                            <a href="./about.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">À
-                                quoi sert ce site ?</a>
+                        <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
                         </div>
+                        
                     </div>
                 </div>
 
@@ -66,8 +65,8 @@
         <!-- Menu Mobile  -->
         <div id="mobile-menu" class="sm:hidden hidden">
             <div class="space-y-1 px-2 pt-2 pb-3">
-                <a href="./about.php" class="block rounded-md px-3 py-2 text-base font-medium hover:text-blue-800">À
-                    quoi sert ce site ?</a>
+            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+
             </div>
         </div>
     </header>

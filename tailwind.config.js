@@ -4,7 +4,11 @@ module.exports = {
     "./*.php","./*.html","./*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'hero-pattern': "url('/assets/space.jpeg')",
+      }
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),
