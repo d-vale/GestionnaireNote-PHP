@@ -66,48 +66,102 @@
     </header>
 
     <main
-        class="space-y-8 flex flex-grow flex-col text-center items-center bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
-
-        <!-- Profil -->
-        <div id="profil" class="p-8 mt-8 flex flex-col items-center gap-8 bg-gray-100 rounded-md">
-            <div class="profilBlock grid md:text-start md:grid-cols-2 grid-cols-1 gap-6 text-center">
-                <div class="row-span-4 flex justify-center items-center ">
-                    <div class="bg-center size-48 profilePicture rounded-md bg-cover"
-                        style="background-image: url(./assets/profilePicture.jpg)">
+        class="items-center space-y-8 flex flex-grow flex-col bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+        <div class="mt-8 pt-8 bg-gray-100 rounded-md drop-shadow-lg">
+            <h1 class="text-4xl font-bold text-center ">Votre Profil</h1>
+            <div id="profil" class="p-8 flex flex-col items-center gap-8 m-2">
+                <div class="profilBlock grid md:text-start md:grid-cols-2 grid-cols-1 gap-6 text-center">
+                    <div class="row-span-4 flex justify-center items-center ">
+                        <div class=" bg-center size-48 profilePicture rounded-md bg-cover"
+                            style="background-image: url(./assets/profilePicture.jpg)">
+                        </div>
+                    </div>
+                    <a href="#"
+                        class="row-span-1 rounded-md text-sm font-medium sm:text-black sm:hover:text-blue-900"
+                        aria-label="Modifier le profil"><img src="" alt=""></a>
+                    <div class="data row-span-3">
+                        <div class="name text-lg font-bold mb-4 text-blue-900">John Doe</div>
+                        <div class="school">École : HEIG-VD</div>
+                        <div class="sector">Filière : COMEM</div>
+                        <div class="class">Classe : M52-2</div>
+                        <div class="mail">Adresse Mail : john.doe@gmail.com</div>
                     </div>
                 </div>
-                <a href="#" class="row-span-1 btnModify rounded-md text-sm font-medium sm:text-black sm:hover:text-blue-900"
-                    aria-label="Modifier le profil">Modifier le Profil</a>
-                <div class="data row-span-3">
-                    <div class="name text-lg font-bold mb-4">John Doe</div>
-                    <div class="school">École : HEIG-VD</div>
-                    <div class="sector">Filière : COMEM</div>
-                    <div class="class">Classe : M52-2</div>
-                    <div class="mail">Adresse Mail : john.doe@gmail.com</div>
+
+                <div id="averages" class="flex flex-row gap-8 text-center">
+                    <div class="averageBlock ">
+                        <div class="averageTitle text-xl font-bold text-blue-900">Moyenne Générale</div>
+                        <div class="averageDisplay font-bold text-xl mt-2">5.3</div>
+                    </div>
+                    <div class="averageBlock">
+                        <div class="averageTitle text-xlr font-bold text-blue-900">Taux de Réussite Global</div>
+                        <div class="averageDisplay font-bold text-xl mt-2 ">89%</div>
+                    </div>
                 </div>
             </div>
 
-            <div id="averages" class="flex flex-row gap-8 text-center">
-                <div class="averageBlock">
-                    <div class="averageTitle text-md font-bold">Moyenne Générale</div>
-                    <div class="averageDisplay font-bold text-lg mt-2">5.3</div>
-                </div>
-                <div class="averageBlock">
-                    <div class="averageTitle text-md font-bold">Taux de Réussite Global</div>
-                    <div class="averageDisplay font-bold text-lg mt-2">89%</div>
+            <!--Formulaire pour remplir de nouvelles notes-->
+            <div class="flex flex-col space-y-12 items-center mt-4" id="gradesForm">
+            <h2 class="text-xl font-bold text-center">Ajouter un résultat</h1>
+                <div class="p-2">
+                    <form class="">
+                        <div class="grid md:grid-cols-2 gap-4 font-semibold grid-cols-1">
+                            <label for="module" class="text-center">Module</label>
+                            <input type="text" name="module"
+                                class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
+                            <label for="ratio" class="text-center">Coefficient</label>
+                            <input type="text" name="ratio"
+                                class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
+                            <label for="lesson" class="text-center">Cours</label>
+                            <input type="text" name="lesson"
+                                class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
+                            <label for="result" class="text-center">Résultat</label>
+                            <input type="text" name="result"
+                                class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
+                            <label for="testName" class="text-center">Nom de l'évaluation</label>
+                            <input type="text" name="testName"
+                                class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
+                        </div>
+                        <div class="flex flex-col items-center pt-4">
+                            <button
+                                class="mt-4 mb-4 block py-2 px-6 rounded-full bg-blue-900 hover:bg-blue-900 text-md text-white font-bold">Ajouter</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
-        <!--Formulaire pour remplir de nouvelles notes-->
-        <div class="" id="gradesForm">
-            <h1 class="text-xl font-bold">Votre Carnet de notes</h1>
-        </div>
-
         <!--Tableau qui affiche les notes-->
 
         <div class="" id="gradesArray">
-            <h1 class="text-xl font-bold">Vos Résultats</h1>
+            <div class="flex items-center flex-center flex-col rounded-md">
+                <table
+                    class="w-full text-md text-left rtl:text-right text-black dark:text-gray-400 m-9 border border-gray-200 shadow-lg">
+                    <thead class="bg-blue-900 text-white">
+                        <tr>
+                            <th class="px-6 py-3 text-center">Supprimer</th>
+                            <th class="px-6 py-3 text-center">Cours</th>
+                            <th class="px-6 py-3 text-center">Module</th>
+                            <th class="px-6 py-3 text-center">Nom de l'évaluation</th>
+                            <th class="px-6 py-3 text-center">Coefficient</th>
+                            <th class="px-6 py-3 text-center">Résultat</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200  text-black">
+                        <tr>
+                            <td class="px-6 py-4 text-center"><button
+                                    class="text-red-700 ring-red-700 hover:text-white hover:bg-red-700 ring-2 font-bold rounded-lg text-sm px-4 py-2 text-center">
+                                    X</button></td>
+                            <td class="px-6 py-4 text-center">Exemple</td>
+                            <td class="px-6 py-4 text-center">Exemple</td>
+                            <td class="px-6 py-4 text-center">Exemple</td>
+                            <td class="px-6 py-4 text-center">Exemple</td>
+                            <td class="px-6 py-4 text-center">Exemple</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </main>
 
@@ -150,14 +204,6 @@
             <p class="mt-8 text-xs text-gray-800">© 2024 ProgServ 2 COMEM HEIG-VD</p>
         </div>
     </footer>
-
-    <script>
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
 </body>
 
 </html>
