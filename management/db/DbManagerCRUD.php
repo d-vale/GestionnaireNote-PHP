@@ -46,6 +46,30 @@ COMMANDE_SQL;
         return $ok;
     }
 
+    //Fonction pour créer la table notes
+    public function creeTableNotes(): bool
+    {
+        $sql = <<<COMMANDE_SQL
+            CREATE TABLE IF NOT EXISTS notes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nomCours VARCHAR(120) NOT NULL,
+                coeficient INTEGER NOT NULL,
+                note FLOAT NOT NULL,
+                utilisateur_id INTEGER NOT NULL,
+                FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
+            );
+COMMANDE_SQL;
+
+        try {
+            $this->db->exec($sql);
+            $ok = true;
+        } catch (\PDOException $e) {
+            $e->getMessage();
+            $ok = false;
+        }
+        return $ok;
+    }
+
     //Fonction pour ajouter un utilisateur
     public function ajouteUtilisateur(Utilisateur $utilisateur): int
     {
@@ -67,6 +91,24 @@ COMMANDE_SQL;
 
         //Envoie du mail de vérification du mail avec le token personnalisé dans le lien
         // include('MailSender_Manager.php');
+
+        return $this->db->lastInsertId();
+    }
+
+    //Fonction pour ajouter une note
+    public function ajouteNotes(Notes $note): int
+    {
+        //Ajoute la note dans la base de données
+        $datas = [
+            'nomCours' => $note->rendNomCours(),
+            'coeficient' => $note->rendCoeficient(),
+            'note' => $note->rendNote(),
+            'utilisateur_id' => $note->rendUtilisateurId(),
+        ];
+        $sql = "INSERT INTO notes (nomCours, coeficient, note, utilisateur_id) VALUES "
+            . "(:nomCours, :coeficient, :note, :utilisateur_id);";
+        $this->db->prepare($sql)->execute($datas);
+        echo '<p style="color: green" class="mt-3 text-center">Note ajoutée</p>';
 
         return $this->db->lastInsertId();
     }
@@ -117,10 +159,44 @@ COMMANDE_SQL;
         return $tabUtilisateurs;
     }
 
+    //Fonction pour récupérer les notes d'un utilisateur
+    public function rendNotes(int $id): array
+    {
+        $sql = "SELECT * From notes WHERE utilisateur_id = :id;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam('id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $donnees = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $tabNotes = [];
+        if ($donnees) {
+            foreach ($donnees as $donneesNote) {
+                $n = new Notes(
+                    $donneesNote["nomCours"],
+                    $donneesNote["coeficient"],
+                    $donneesNote["note"],
+                    $donneesNote["utilisateur_id"],
+                    $donneesNote["id"]
+                );
+                $tabNotes[] = $n;
+            }
+        }
+        return $tabNotes;
+    }
+
     //Fonction pour supprimer un utilisateur
     public function supprimeUtilisateur(int $id): bool
     {
         $sql = "DELETE FROM utilisateurs WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam('id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+
+    //Fonction pour supprimer une note
+    public function supprimeNotes(int $id): bool
+    {
+        $sql = "DELETE FROM notes WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam('id', $id, \PDO::PARAM_INT);
         $stmt->execute();
