@@ -1,8 +1,8 @@
 <?php
 
-namespace ch\comem;
+namespace management\db;
 
-class DbManagerCRUD implements I_ApiCRUD
+class DbManager implements I_ApiCRUD
 {
 
     private $db;
@@ -32,7 +32,7 @@ class DbManagerCRUD implements I_ApiCRUD
                 filiere VARCHAR(120) NOT NULL,
                 classe VARCHAR(20) NOT NULL,
                 langue VARCHAR(40) NOT NULL,
-                password VARCHAR(255) NOT NULL,
+                password VARCHAR(255) NOT NULL
             );
 COMMANDE_SQL;
 

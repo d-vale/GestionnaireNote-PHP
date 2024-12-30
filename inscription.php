@@ -1,10 +1,3 @@
-<?php
-
-//Insertion du code php
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -46,7 +39,7 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
 
-                        <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+                            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
 
                         </div>
                     </div>
@@ -64,7 +57,7 @@
         <!-- Menu Mobile  -->
         <div id="mobile-menu" class="sm:hidden hidden">
             <div class="space-y-1 px-2 pt-2 pb-3">
-            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+                <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
 
                 <a href="./" class="block rounded-md px-3 py-2 text-base font-medium hover:text-blue-800">Accueil</a>
             </div>
@@ -83,7 +76,7 @@
         <!-- Formulaire -->
         <div class="mt-24 flex flex-col items-center" style="margin-bottom: 5rem;">
 
-            <form action="" method="" class=" flex flex-col items-center ">
+            <form action="" method="POST" class=" flex flex-col items-center ">
 
                 <div class="grid md:gap-4 md:grid-cols-2 grid-cols-1" style="margin-bottom:  5rem;">
                     <div>
@@ -130,10 +123,10 @@
                             Langue de préférence
                         </label>
                         <select name="language" id="language" class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                            <option class="font-light"selected>Choisir une langue</option>
+                            <option class="font-light" selected>Choisir une langue</option>
                             <option value="french">Français</option>
                             <option value="english">Anglais</option>
-                            </select>
+                        </select>
                     </div>
                     <div>
                         <label for="email" class="mb-3 block text-base font-medium">
@@ -146,20 +139,45 @@
                         <label for="password" class="mb-3 block text-base font-medium">
                             Mot de passe
                         </label>
-                        <input type="password" name="password" 
+                        <input type="password" name="password"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
-                    
+
                 </div>
                 <div class="mt-18">
-                <button id="subscribe"
+                    <button id="subscribe"
                         class="block text-basme font-medium rounded-full bg-blue-900 hover:bg-black text-lg text-white p-3">
                         S'inscrire
-                </button>
+                    </button>
                 </div>
-            
+
             </form>
 
+            <!-- Code PHP pour ajouter l'utilisateur à la DB -->
+            <?php
+            require_once("./config/autoload.php");
+
+            use management\db\DbManager;
+            use management\db\Utilisateur;
+
+            $db = new DbManager();
+            $db->creeTableUtilisateur();
+
+            if (isset($_POST['firstname']) && isset($_POST['name']) && isset($_POST['school']) && isset($_POST['sector']) && isset($_POST['class']) && isset($_POST['language']) && isset($_POST['email']) && isset($_POST['password'])) {
+                $firstname = $_POST['firstname'];
+                $name = $_POST['name'];
+                $school = $_POST['school'];
+                $sector = $_POST['sector'];
+                $class = $_POST['class'];
+                $language = $_POST['language'];
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                $password = password_hash($password, PASSWORD_DEFAULT);
+
+                $utilisateur = new Utilisateur($firstname, $name, $email, $school, $sector, $class, $language, $password);
+                $db->ajouteUtilisateur($utilisateur);
+            }
+            ?>
         </div>
 
     </main>
