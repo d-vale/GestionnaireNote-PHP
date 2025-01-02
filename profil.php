@@ -1,10 +1,4 @@
-<?php
-
-//Insertion du code php
-
-?>
-
-<!doctype html>
+<!Doctype html>
 <html lang="fr">
 
 <head>
@@ -20,10 +14,11 @@
     <header class="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
         <nav class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
+
                 <!-- Version mobile -->
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <button id="menu-btn" type="button"
-                        class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                             aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -34,39 +29,70 @@
 
                 <!-- Logo et liens -->
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                    <div class="hidden shrink-0 items-center sm:flex">
+                    <div class="hidden sm:flex shrink-0 items-center">
                         <a href="./">
-                            <img class="h-8 w-auto" src="./assets/logo.svg" alt="Logo de notre projet" />
+                            <img class="h-8 w-auto" src="./assets/logo.svg" alt="Logo de notre projet">
                         </a>
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
-                        <div class="flex space-x-4">
-                            <a href="./profil.php"
-                                class="rounded-md px-3 py-2 text-sm font-medium hover:text-blue-900">Mon Profil</a>
-                        </div>
+                        <?php
+                        //Vérifier si l'utilisateur est connecté et a accès à la page
+                        session_start();
+
+                        if (!isset($_SESSION['email'])) {
+                            echo '';
+                        } else {
+                            echo '<div class="flex space-x-4">
+                            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+                        </div>';
+                        }
+                        ?>
                     </div>
                 </div>
 
+
                 <!-- Boutons à droite -->
-                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <?php
+                //Vérifier si l'utilisateur est connecté et a accès à la page
+                if (!isset($_SESSION['email'])) {
+                    echo '<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <a href="./connection.php"
+                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">Se connecter</a>
+                    <a href="./inscription.php"
+                        class="rounded-full -md bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm font-medium text-white">S&#39;inscrire</a>
+                </div>';
+                } else {
+                    echo '<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <a href="logout.php"
                         class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">Se
                         déconnecter</a>
-                </div>
+                </div>';
+                }
+                ?>
             </div>
         </nav>
 
         <!-- Menu Mobile  -->
-        <div id="mobile-menu" class="hidden sm:hidden">
-            <div class="space-y-1 px-2 pb-3 pt-2">
-                <a href="./profil.php" class="rounded-md px-3 py-2 text-sm font-medium hover:text-blue-900">Mon
-                    Profil</a>
+        <?php
+        if (!isset($_SESSION['email'])) {
+            echo '';
+        } else {
+            echo '<div id="mobile-menu" class="sm:hidden hidden">
+            <div class="space-y-1 px-2 pt-2 pb-3">
+                <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
             </div>
-        </div>
+        </div>';
+        }
+        ?>
     </header>
 
     <main
         class="items-center space-y-8 flex flex-grow flex-col bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+        <!-- Protéction pour la page profil si l'utilisateur est login -->
+        <?php
+        require_once 'assets/protected.php';
+
+        ?>
         <div class="mt-8 pt-8 bg-gray-100 rounded-md drop-shadow-lg">
             <h1 class="text-4xl font-bold text-center ">Votre Profil</h1>
             <div id="profil" class="p-8 flex flex-col items-center gap-8 m-2">
@@ -97,32 +123,32 @@
 
             <!--Formulaire pour remplir de nouvelles notes-->
             <div class="flex flex-col space-y-12 items-center mt-4" id="gradesForm">
-            <h2 class="text-xl font-bold text-center">Ajouter un résultat</h1>
-                <div class="p-2">
-                    <form class="">
-                        <div class="grid md:grid-cols-2 gap-4 font-semibold grid-cols-1">
-                            <label for="module" class="text-center">Module</label>
-                            <input type="text" name="module"
-                                class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                            <label for="ratio" class="text-center">Coefficient</label>
-                            <input type="text" name="ratio"
-                                class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                            <label for="lesson" class="text-center">Cours</label>
-                            <input type="text" name="lesson"
-                                class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                            <label for="result" class="text-center">Résultat</label>
-                            <input type="text" name="result"
-                                class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                            <label for="testName" class="text-center">Nom de l'évaluation</label>
-                            <input type="text" name="testName"
-                                class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                        </div>
-                        <div class="flex flex-col items-center pt-4">
-                            <button
-                                class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">Ajouter</button>
-                        </div>
-                    </form>
-                </div>
+                <h2 class="text-xl font-bold text-center">Ajouter un résultat</h1>
+                    <div class="p-2">
+                        <form class="">
+                            <div class="grid md:grid-cols-2 gap-4 font-semibold grid-cols-1">
+                                <label for="module" class="text-center">Module</label>
+                                <input type="text" name="module"
+                                    class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
+                                <label for="ratio" class="text-center">Coefficient</label>
+                                <input type="text" name="ratio"
+                                    class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
+                                <label for="lesson" class="text-center">Cours</label>
+                                <input type="text" name="lesson"
+                                    class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
+                                <label for="result" class="text-center">Résultat</label>
+                                <input type="text" name="result"
+                                    class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
+                                <label for="testName" class="text-center">Nom de l'évaluation</label>
+                                <input type="text" name="testName"
+                                    class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
+                            </div>
+                            <div class="flex flex-col items-center pt-4">
+                                <button
+                                    class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">Ajouter</button>
+                            </div>
+                        </form>
+                    </div>
             </div>
         </div>
         <!--Tableau qui affiche les notes-->

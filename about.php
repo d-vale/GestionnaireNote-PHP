@@ -14,7 +14,6 @@
     <link href="styles/output.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/assets/logo.svg">
     <title>Gestionnaire de notes</title>
-
 </head>
 
 <body class="flex flex-col min-h-screen divide-y divide-gray-100 ">
