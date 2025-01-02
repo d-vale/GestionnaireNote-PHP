@@ -46,7 +46,7 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
 
-                        <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+                            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
 
                         </div>
                     </div>
@@ -64,7 +64,7 @@
         <!-- Menu Mobile  -->
         <div id="mobile-menu" class="sm:hidden hidden">
             <div class="space-y-1 px-2 pt-2 pb-3">
-            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+                <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
                 <a href="./" class="block rounded-md px-3 py-2 text-base font-medium hover:text-blue-800">Accueil</a>
             </div>
         </div>
@@ -81,7 +81,7 @@
         <!-- Formulaire -->
         <div class="mt-24 flex flex-col items-center" style="margin-bottom: 5rem;">
 
-            <form action="./profil.php" method="" class="mb-24 flex flex-col items-center gap-4 ">
+            <form action="" method="POST" class="mb-24 flex flex-col items-center gap-4 ">
 
                 <div class="grid grid-cols-2 gap-4 md:grid-cols-1" style="margin-bottom:  5rem;">
                     <div>
@@ -98,16 +98,15 @@
                         <input type="password" name="password"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
-                    
+
                 </div>
                 <div class="mt-18">
-                <button class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">
+                    <button type="submit" name="submit" class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">
                         Se connecter
-                </button>
+                    </button>
                 </div>
-            
-            </form>
 
+            </form>
         </div>
 
     </main>
@@ -170,3 +169,14 @@
 </body>
 
 </html>
+<!-- Code php pour connexion et qui appella la fonction loginUtilisateur de Dbmanager -->
+<?php
+require_once("./config/autoload.php");
+
+use management\db\DbManager;
+
+if (isset($_POST['submit'])) {
+    $db = new DbManager();
+    $db->loginUtilisateur();
+}
+?>

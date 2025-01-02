@@ -1,10 +1,3 @@
-<?php
-
-//Insertion du code php
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -45,27 +38,40 @@
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
-                        <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+                            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
                         </div>
-                    
+
                     </div>
                 </div>
 
 
                 <!-- Boutons à droite -->
-                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <?php
+                //Vérifier si l'utilisateur est connecté et a accès à la page
+                session_start();
+
+                if (!isset($_SESSION['email'])) {
+                    echo '<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <a href="./connection.php"
                         class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">Se connecter</a>
                     <a href="./inscription.php"
-                        class="rounded-full -md bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm font-medium text-white">S'inscrire</a>
-                </div>
+                        class="rounded-full -md bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm font-medium text-white">S&#39;inscrire</a>
+                </div>';
+                } else {
+                    echo '<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <a href="logout.php"
+                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">Se
+                        déconnecter</a>
+                </div>';
+                }
+                ?>
             </div>
         </nav>
 
         <!-- Menu Mobile  -->
         <div id="mobile-menu" class="sm:hidden hidden">
             <div class="space-y-1 px-2 pt-2 pb-3">
-            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+                <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
             </div>
         </div>
     </header>
