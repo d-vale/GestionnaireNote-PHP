@@ -52,9 +52,11 @@ COMMANDE_SQL;
         $sql = <<<COMMANDE_SQL
             CREATE TABLE IF NOT EXISTS notes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nomCours VARCHAR(120) NOT NULL,
+                module VARCHAR(120) NOT NULL,
                 coeficient INTEGER NOT NULL,
+                nomCours VARCHAR(120) NOT NULL,
                 note FLOAT NOT NULL,
+                nomEvaluation VARCHAR(120) NOT NULL,
                 utilisateur_id INTEGER NOT NULL,
                 FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
             );
@@ -100,13 +102,15 @@ COMMANDE_SQL;
     {
         //Ajoute la note dans la base de données
         $datas = [
+            'module' => $note->rendModule(),
+            'nomEvaluation' => $note->rendNomEvaluation(),
             'nomCours' => $note->rendNomCours(),
             'coeficient' => $note->rendCoeficient(),
             'note' => $note->rendNote(),
             'utilisateur_id' => $note->rendUtilisateurId(),
         ];
-        $sql = "INSERT INTO notes (nomCours, coeficient, note, utilisateur_id) VALUES "
-            . "(:nomCours, :coeficient, :note, :utilisateur_id);";
+        $sql = "INSERT INTO notes (module, coeficient, nomCours, note, nomEvaluation, utilisateur_id) VALUES "
+            . "(:module, :coeficient, :nomCours, :note, :nomEvaluation, :utilisateur_id);";
         $this->db->prepare($sql)->execute($datas);
         echo '<p style="color: green" class="mt-3 text-center">Note ajoutée</p>';
 
@@ -171,9 +175,11 @@ COMMANDE_SQL;
         if ($donnees) {
             foreach ($donnees as $donneesNote) {
                 $n = new Notes(
-                    $donneesNote["nomCours"],
+                    $donneesNote["module"],
                     $donneesNote["coeficient"],
+                    $donneesNote["nomCours"],
                     $donneesNote["note"],
+                    $donneesNote["nomEvaluation"],
                     $donneesNote["utilisateur_id"],
                     $donneesNote["id"]
                 );

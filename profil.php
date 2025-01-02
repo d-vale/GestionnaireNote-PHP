@@ -157,13 +157,15 @@
                     use management\db\Notes;
 
                     if (isset($_POST['submit'])) {
+                        $module = $_POST['module'];
                         $nomCours = $_POST['lesson'];
                         $coeficient = $_POST['ratio'];
+                        $nomEvaluation = $_POST['testName'];
                         $note = $_POST['result'];
                         $utilisateur_id = $_SESSION['id'];
 
                         $dbManager = new DbManager();
-                        $newNote = new Notes($nomCours, $coeficient, $note, $utilisateur_id);
+                        $newNote = new Notes($module, $coeficient, $nomCours, $note, $nomEvaluation, $utilisateur_id);
                         
                         try {
                             $dbManager->creeTableNotes();
@@ -191,19 +193,38 @@
                             <th class="px-6 py-3 text-center">Résultat</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-200  text-black">
-                        <tr>
-                            <td class="px-6 py-4 text-center"><button
-                                    class="text-red-700 ring-red-700 hover:text-white hover:bg-red-700 ring-2 font-bold rounded-lg text-sm px-4 py-2 text-center">
-                                    X</button></td>
-                            <td class="px-6 py-4 text-center">Exemple</td>
-                            <td class="px-6 py-4 text-center">Exemple</td>
-                            <td class="px-6 py-4 text-center">Exemple</td>
-                            <td class="px-6 py-4 text-center">Exemple</td>
-                            <td class="px-6 py-4 text-center">Exemple</td>
+                    <tbody class="divide-y divide-gray-200 text-black">
+                    <?php
+                    //Fonction pour afficher les notes de cette utilisateurs
+                    require_once("./config/autoload.php");
+                    $dbManager = new DbManager();
 
-                        </tr>
-                    </tbody>
+                    // Crée la table notes si elle n'existe pas
+                    $dbManager->creeTableNotes();
+
+                    // Supprimer les anciennes notes affichées
+                    echo '<tbody class="divide-y divide-gray-200 text-black">';
+                    
+                    // Vérifie si la table notes existe et si l'utilisateur a des notes
+                    $notes = $dbManager->rendNotes($_SESSION['id']);
+                    if (!empty($notes)) {
+                        foreach ($notes as $note) {
+                            echo '<tr>
+                                    <td class="px-6 py-4 text-center">
+                                        <button class="text-red-700 ring-red-700 hover:text-white hover:bg-red-700 ring-2 font-bold rounded-lg text-sm px-4 py-2 text-center">X</button>
+                                    </td>
+                                    <td class="px-6 py-4 text-center">' . $note->rendNomCours() . '</td>
+                                    <td class="px-6 py-4 text-center">' . $note->rendModule() . '</td>
+                                    <td class="px-6 py-4 text-center">' . $note->rendNomEvaluation() . '</td>
+                                    <td class="px-6 py-4 text-center">' . $note->rendCoeficient() . '</td>
+                                    <td class="px-6 py-4 text-center">' . $note->rendNote() . '</td>
+                                </tr>';
+                        }
+                    } else {
+                        echo '<tr><td colspan="6" class="px-6 py-4 text-center">Aucune note n\'a été ajoutée</td></tr>';
+                    }
+                    echo '</tbody>';
+                    ?>
                 </table>
             </div>
 

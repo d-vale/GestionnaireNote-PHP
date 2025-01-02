@@ -15,6 +15,8 @@ use \Exception;
 class Notes {
 
     private $id;
+    private $module;
+    private $nomEvaluation;
     private $nomCours;
     private $coeficient;
     private $note;
@@ -29,7 +31,16 @@ class Notes {
      * @param string $id Identifiant de la personne
      * @throws Exception Lance une expection si un des paramètres n'est pas spécifié
      */
-    public function __construct(string $nomCours, int $coeficient, float $note, int $utilisateur_id) {
+    public function __construct(string $module, int $coeficient, string $nomCours,  float $note, string $nomEvaluation, int $utilisateur_id) {
+        if (empty($module)) {
+            throw new Exception('Il faut un module');
+        }
+        if (empty($nomEvaluation)) {
+            throw new Exception('Il faut un nom d\'évaluation');
+        }
+        if (empty($coeficient)) {
+            throw new Exception('Il faut un coeficient');
+        }
         if (empty($nomCours)) {
             throw new Exception('Il faut un nom de cours');
         }
@@ -46,6 +57,8 @@ class Notes {
             throw new Exception('Il faut un utilisateur_id');
         }
 
+        $this->module = $module;
+        $this->nomEvaluation = $nomEvaluation;
         $this->nomCours = $nomCours;
         $this->coeficient = $coeficient;
         $this->note = $note;
@@ -89,6 +102,19 @@ class Notes {
         return $this->note;
     }
     
+    /**
+     * Rend le module
+     */
+    public function rendModule(): string {
+        return $this->module;
+    }
+
+    /**
+     * Rend le nom de l'évaluation
+     */
+    public function rendNomEvaluation(): string {
+        return $this->nomEvaluation;
+    }
 
     /**
      * Rend l'id de l'utilisateur
