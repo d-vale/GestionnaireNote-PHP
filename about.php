@@ -1,10 +1,3 @@
-<?php
-
-//Insertion du code php
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
 

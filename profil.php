@@ -101,11 +101,11 @@
                         class="underline row-span-1 rounded-md text-sm font-medium  sm:text-black sm:hover:text-blue-900"
                         aria-label="Modifier le profil">Paramètres</a>
                     <div class="data row-span-3">
-                        <div class="name text-lg font-bold mb-4 text-blue-900">John Doe</div>
-                        <div class="school">École : HEIG-VD</div>
-                        <div class="sector">Filière : COMEM</div>
-                        <div class="class">Classe : M52-2</div>
-                        <div class="mail">Adresse Mail : john.doe@gmail.com</div>
+                        <div class="name text-lg font-bold mb-4 text-blue-900"><?php echo $_SESSION['prenom'] . " " . $_SESSION['nom'] ?></div>
+                        <div class="school">École : <?php echo $_SESSION['ecole'] ?></div>
+                        <div class="sector">Filière : <?php echo $_SESSION['filiere'] ?></div>
+                        <div class="class">Classe : <?php echo $_SESSION['classe'] ?></div>
+                        <div class="mail">Adresse Mail : <?php echo $_SESSION['email'] ?></div>
                     </div>
                 </div>
 
@@ -125,7 +125,7 @@
             <div class="flex flex-col space-y-12 items-center mt-4" id="gradesForm">
                 <h2 class="text-xl font-bold text-center">Ajouter un résultat</h1>
                     <div class="p-2">
-                        <form class="">
+                        <form class="" method="POST" action="">
                             <div class="grid md:grid-cols-2 gap-4 font-semibold grid-cols-1">
                                 <label for="module" class="text-center">Module</label>
                                 <input type="text" name="module"
@@ -145,10 +145,34 @@
                             </div>
                             <div class="flex flex-col items-center pt-4">
                                 <button
-                                    class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">Ajouter</button>
+                                    type="submit" name="submit" class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">Ajouter</button>
                             </div>
                         </form>
                     </div>
+                    <?php
+                    //Ajouter une note
+                    require_once("./config/autoload.php");
+
+                    use management\db\DbManager;
+                    use management\db\Notes;
+
+                    if (isset($_POST['submit'])) {
+                        $nomCours = $_POST['lesson'];
+                        $coeficient = $_POST['ratio'];
+                        $note = $_POST['result'];
+                        $utilisateur_id = $_SESSION['id'];
+
+                        $dbManager = new DbManager();
+                        $newNote = new Notes($nomCours, $coeficient, $note, $utilisateur_id);
+                        
+                        try {
+                            $dbManager->creeTableNotes();
+                            $dbManager->ajouteNotes($newNote);
+                        } catch (\PDOException $e) {
+                            echo '<div class="text-center text-red-500">Erreur lors de l\'ajout de la note</div>';
+                        }
+                    }
+                    ?>
             </div>
         </div>
         <!--Tableau qui affiche les notes-->

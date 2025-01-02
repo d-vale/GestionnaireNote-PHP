@@ -37,7 +37,7 @@ class Utilisateur {
      * @param string $id Identifiant de la personne
      * @throws Exception Lance une expection si un des paramètres n'est pas spécifié
      */
-    public function __construct(string $prenom, string $nom, string $email, string $ecole, string $filiere, string $classe, string $langue = "Français", string $password, ?int $id = null) {
+    public function __construct(string $prenom, string $nom, string $email, string $ecole, string $filiere, string $classe, string $langue = "Français", string $password) {
         if (empty($prenom)) {
             throw new Exception('Il faut un prénom');
         }
@@ -62,9 +62,6 @@ class Utilisateur {
         if (empty($password)) {
             throw new Exception('Il faut un mot de passe');
         }
-        if ($id !== null && $id < 0) {
-            throw new Exception('Il faut un id valide');
-        }
 
         $this->prenom = $prenom;
         $this->nom = $nom;
@@ -74,7 +71,6 @@ class Utilisateur {
         $this->classe = $classe;
         $this->langue = $langue;
         $this->password = $password;
-        $this->id = $id;
     }
 
     /**

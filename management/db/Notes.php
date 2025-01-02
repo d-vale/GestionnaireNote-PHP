@@ -29,7 +29,7 @@ class Notes {
      * @param string $id Identifiant de la personne
      * @throws Exception Lance une expection si un des paramètres n'est pas spécifié
      */
-    public function __construct(string $nomCours, int $coeficient, float $note, int $utilisateur_id, ?int $id = null) {
+    public function __construct(string $nomCours, int $coeficient, float $note, int $utilisateur_id) {
         if (empty($nomCours)) {
             throw new Exception('Il faut un nom de cours');
         }
@@ -45,11 +45,7 @@ class Notes {
         if (empty($utilisateur_id)) {
             throw new Exception('Il faut un utilisateur_id');
         }
-        if (empty($id)) {
-            throw new Exception('Il faut un id');
-        }
 
-        $this->id = $id;
         $this->nomCours = $nomCours;
         $this->coeficient = $coeficient;
         $this->note = $note;
