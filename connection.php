@@ -1,10 +1,12 @@
 <?php
+require_once("./config/autoload.php");
+use management\db\DbManager;
 
-//Insertion du code php
-
+$dbManager = new DbManager();
+if(isset($_POST['submit'])){
+    $dbManager->loginUtilisateur();
+}
 ?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -169,14 +171,3 @@
 </body>
 
 </html>
-<!-- Code php pour connexion et qui appella la fonction loginUtilisateur de Dbmanager -->
-<?php
-require_once("./config/autoload.php");
-
-use management\db\DbManager;
-
-if (isset($_POST['submit'])) {
-    $db = new DbManager();
-    $db->loginUtilisateur();
-}
-?>

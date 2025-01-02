@@ -203,33 +203,36 @@ COMMANDE_SQL;
         return $stmt->rowCount() > 0;
     }
 
-    //Fonction pour login utilisateur
-    public function loginUtilisateur(): bool
+    //Fonction pour vérifier le login d'un utilisateur
+    public function loginUtilisateur(): void
     {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $password = $_POST['password'];
 
         if ($email && $password) {
+            $db = new \PDO("sqlite:db/dbpsw.sqlite", "", "");
             $sql = "SELECT * FROM utilisateurs WHERE email = :email";
-            $stmt = $this->db->prepare($sql);
+            $stmt = $db->prepare($sql);
             $stmt->bindParam(':email', $email);
 
             if ($stmt->execute()) {
                 $result = $stmt->fetch(\PDO::FETCH_ASSOC);
                 if ($result && password_verify($password, $result['password'])) {
+                    session_start();
                     $_SESSION['email'] = $email;
                     $_SESSION['prenom'] = $result['prenom'];
                     $_SESSION['nom'] = $result['nom'];
-                    return true;
+                    header("Location: profil.php");
+                } else {
+                    echo '<p style="color: red" class="mt-3 text-center">Email ou mot de passe incorrect</p>';
                 }
+            } else {
+                echo '<p style="color: red" class="mt-3 text-center">Erreur de connexion</p>';
             }
-            $_SESSION['error'] = 'Email ou mot de passe incorrect';
-            return false;
+        } else {
+            echo '<p style="color: red" class="mt-3 text-center">Email ou mot de passe incorrect</p>';
         }
-        $_SESSION['error'] = 'Email ou mot de passe incorrect';
-        return false;
     }
-
     // //Fonction pour vérifier le token de l'utilisateur
     // public function verifyToken(string $token): void
     // {

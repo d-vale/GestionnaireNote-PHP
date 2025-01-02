@@ -37,10 +37,18 @@
                         </a>
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
-                        <div class="flex space-x-4">
-                            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
-                        </div>
+                        <?php
+                        //Vérifier si l'utilisateur est connecté et a accès à la page
+                        session_start();
 
+                        if (!isset($_SESSION['email'])) {
+                            echo '';
+                        } else {
+                            echo '<div class="flex space-x-4">
+                            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+                        </div>';
+                        }
+                        ?>
                     </div>
                 </div>
 
@@ -48,8 +56,6 @@
                 <!-- Boutons à droite -->
                 <?php
                 //Vérifier si l'utilisateur est connecté et a accès à la page
-                session_start();
-
                 if (!isset($_SESSION['email'])) {
                     echo '<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <a href="./connection.php"
