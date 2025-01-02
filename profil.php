@@ -70,12 +70,7 @@
         <div class="mt-8 pt-8 bg-gray-100 rounded-md drop-shadow-lg">
             <h1 class="text-4xl font-bold text-center ">Votre Profil</h1>
             <div id="profil" class="p-8 flex flex-col items-center gap-8 m-2">
-                <div class="profilBlock grid md:text-start md:grid-cols-2 grid-cols-1 gap-6 text-center">
-                    <div class="row-span-4 flex justify-center items-center ">
-                        <div class=" bg-center size-48 profilePicture rounded-md bg-cover"
-                            style="background-image: url(./assets/profilePicture.jpg)">
-                        </div>
-                    </div>
+                <div class="profilBlock grid grid-cols-1 gap-6 text-center items-center">
                     <a href="./settings.php"
                         class="underline row-span-1 rounded-md text-sm font-medium  sm:text-black sm:hover:text-blue-900"
                         aria-label="Modifier le profil">Paramètres</a>
