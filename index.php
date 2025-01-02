@@ -38,7 +38,6 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <?php
                         //Vérifier si l'utilisateur est connecté et a accès à la page
-                        session_start();
 
                         if (!isset($_SESSION['email'])) {
                             echo '';

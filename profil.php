@@ -1,3 +1,9 @@
+<?php
+//Vérifier si l'utilisateur est connecté et a accès à la page
+session_start();
+
+?>
+
 <!Doctype html>
 <html lang="fr">
 
@@ -37,8 +43,7 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <?php
                         //Vérifier si l'utilisateur est connecté et a accès à la page
-                        session_start();
-
+                        
                         if (!isset($_SESSION['email'])) {
                             echo '';
                         } else {
@@ -101,7 +106,8 @@
                         class="underline row-span-1 rounded-md text-sm font-medium  sm:text-black sm:hover:text-blue-900"
                         aria-label="Modifier le profil">Paramètres</a>
                     <div class="data row-span-3">
-                        <div class="name text-lg font-bold mb-4 text-blue-900"><?php echo $_SESSION['prenom'] . " " . $_SESSION['nom'] ?></div>
+                        <div class="name text-lg font-bold mb-4 text-blue-900">
+                            <?php echo $_SESSION['prenom'] . " " . $_SESSION['nom'] ?></div>
                         <div class="school">École : <?php echo $_SESSION['ecole'] ?></div>
                         <div class="sector">Filière : <?php echo $_SESSION['filiere'] ?></div>
                         <div class="class">Classe : <?php echo $_SESSION['classe'] ?></div>
@@ -144,8 +150,8 @@
                                     class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
                             </div>
                             <div class="flex flex-col items-center pt-4">
-                                <button
-                                    type="submit" name="submit" class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">Ajouter</button>
+                                <button type="submit" name="submit"
+                                    class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">Ajouter</button>
                             </div>
                         </form>
                     </div>
@@ -166,7 +172,7 @@
 
                         $dbManager = new DbManager();
                         $newNote = new Notes($module, $coeficient, $nomCours, $note, $nomEvaluation, $utilisateur_id);
-                        
+
                         try {
                             $dbManager->creeTableNotes();
                             $dbManager->ajouteNotes($newNote);
@@ -194,22 +200,22 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 text-black">
-                    <?php
-                    //Fonction pour afficher les notes de cette utilisateurs
-                    require_once("./config/autoload.php");
-                    $dbManager = new DbManager();
+                        <?php
+                        //Fonction pour afficher les notes de cette utilisateurs
+                        require_once("./config/autoload.php");
+                        $dbManager = new DbManager();
 
-                    // Crée la table notes si elle n'existe pas
-                    $dbManager->creeTableNotes();
+                        // Crée la table notes si elle n'existe pas
+                        $dbManager->creeTableNotes();
 
-                    // Supprimer les anciennes notes affichées
-                    echo '<tbody class="divide-y divide-gray-200 text-black">';
-                    
-                    // Vérifie si la table notes existe et si l'utilisateur a des notes
-                    $notes = $dbManager->rendNotes($_SESSION['id']);
-                    if (!empty($notes)) {
-                        foreach ($notes as $note) {
-                            echo '<tr>
+                        // Supprimer les anciennes notes affichées
+                        echo '<tbody class="divide-y divide-gray-200 text-black">';
+
+                        // Vérifie si la table notes existe et si l'utilisateur a des notes
+                        $notes = $dbManager->rendNotes($_SESSION['id']);
+                        if (!empty($notes)) {
+                            foreach ($notes as $note) {
+                                echo '<tr>
                                     <td class="px-6 py-4 text-center">
                                         <button class="text-red-700 ring-red-700 hover:text-white hover:bg-red-700 ring-2 font-bold rounded-lg text-sm px-4 py-2 text-center">X</button>
                                     </td>
@@ -219,16 +225,24 @@
                                     <td class="px-6 py-4 text-center">' . $note->rendCoeficient() . '</td>
                                     <td class="px-6 py-4 text-center">' . $note->rendNote() . '</td>
                                 </tr>';
+                            }
+                        } else {
+                            echo '<tr><td colspan="6" class="px-6 py-4 text-center">Aucune note n\'a été ajoutée</td></tr>';
                         }
-                    } else {
-                        echo '<tr><td colspan="6" class="px-6 py-4 text-center">Aucune note n\'a été ajoutée</td></tr>';
-                    }
-                    echo '</tbody>';
-                    ?>
+                        echo '</tbody>';
+                        ?>
                 </table>
             </div>
 
         </div>
+        <form action="./generate_pdf.php" method="post">
+            <div class="flex flex-col items-center pt-2 pb-4">
+                <button type="submit" name="submit"
+                    class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">
+                    Exporter en PDF
+                </button>
+            </div>
+        </form>
     </main>
 
     <!-- Footer -->
