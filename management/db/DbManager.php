@@ -222,6 +222,11 @@ COMMANDE_SQL;
                     $_SESSION['email'] = $email;
                     $_SESSION['prenom'] = $result['prenom'];
                     $_SESSION['nom'] = $result['nom'];
+                    $_SESSION['ecole'] = $result['ecole'];
+                    $_SESSION['filiere'] = $result['filiere'];
+                    $_SESSION['classe'] = $result['classe'];
+                    $_SESSION['langue'] = $result['langue'];
+                    $_SESSION['id'] = $result['id'];
                     header("Location: profil.php");
                 } else {
                     echo '<p style="color: red" class="mt-3 text-center">Email ou mot de passe incorrect</p>';

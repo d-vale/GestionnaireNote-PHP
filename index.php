@@ -75,11 +75,17 @@
         </nav>
 
         <!-- Menu Mobile  -->
-        <div id="mobile-menu" class="sm:hidden hidden">
+        <?php
+        if (!isset($_SESSION['email'])) {
+            echo '';
+        } else {
+            echo '<div id="mobile-menu" class="sm:hidden hidden">
             <div class="space-y-1 px-2 pt-2 pb-3">
                 <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
             </div>
-        </div>
+        </div>';
+        }
+        ?>
     </header>
 
     <!-- Contenu du Main -->
@@ -93,13 +99,20 @@
                             <h1 class="text-5xl mb-6 font-bold">Votre gestionnaire de notes</h1>
                             <p class="text-xl mb-12">Grâce à ce site, suivez votre avancée dans l'année scolaire,
                                 répertoriez vos notes et calculez vos moyennes.</p>
-                            <div class="flex flex-col md:flex-row gap-4">
+                            <?php
+                            if (!isset($_SESSION['email'])) {
+                                echo '<div class="flex flex-col md:flex-row gap-4">
                                 <a href="./inscription.php"
-                                    class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">S'inscrire</a>
+                                    class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">S&#39;inscrire</a>
                                 <a href="./connection.php"
                                     class="text-black py-4 px-12 rounded-full hover:text-blue-900">Déjà inscrit ? Se
                                     connecter</a>
-                            </div>
+                            </div>';
+                            } else {
+                                echo '';
+                            }
+                            ?>
+
                         </div>
                         <div>
                             <img src="https://www.hes-so.ch/fileadmin/_processed_/8/b/csm_heig-vd-batiment_47d3b6488c.jpg"
