@@ -33,18 +33,19 @@ if($_SESSION["id"]) {
     $pdf->SetFont('Arial','',16);
     $pdf->Cell(0, 10, iconv('UTF-8', 'windows-1252', 'Récapitulatif des notes au '.$date. ' à '.$hour));
     $pdf->Ln();
-    $pdf->SetFont('Arial','',12);
+    $pdf->SetFont('Arial','B',12);
     $pdf->Ln();
 
-    $pdf->SetFont('Arial','',10);
-    $pdf->Cell(40, 10, iconv('UTF-8', 'windows-1252', "Module"),1,0,"C");
-    $pdf->Cell(40, 10, "Evaluation",1,0,"C");
-    $pdf->Cell(40, 10, "Cours",1,0,"C");
+    $pdf->SetFont('Arial','B',10);
+    $pdf->Cell(50, 10, iconv('UTF-8', 'windows-1252', "Module"),1,0,"C");
+    $pdf->Cell(50, 10, "Evaluation",1,0,"C");
+    $pdf->Cell(50, 10, "Cours",1,0,"C");
     $pdf->Cell(23, 10, "Coeficient",1,0,"C");
     $pdf->Cell(20, 10, iconv('UTF-8', 'windows-1252', "Résultat"),1,0,"C");
 
     $pdf->Ln();
 
+    $pdf->SetFont('Arial','',10);
     foreach($tableauNote as $note) {
         $module = $note->rendModule();
         $cours = $note->rendNomCours();
@@ -52,9 +53,9 @@ if($_SESSION["id"]) {
         $resultat = $note->rendNote();
         $nomEvaluation = $note->rendNomEvaluation();
 
-        $pdf->Cell(40, 10, iconv('UTF-8', 'windows-1252', $module),1,0,"C");
-        $pdf->Cell(40, 10, iconv('UTF-8', 'windows-1252', $cours),1,0,"C");
-        $pdf->Cell(40, 10, iconv('UTF-8', 'windows-1252', $nomEvaluation),1,0,"C");
+        $pdf->Cell(50, 10, iconv('UTF-8', 'windows-1252', $module),1,0,"C");
+        $pdf->Cell(50, 10, iconv('UTF-8', 'windows-1252', $cours),1,0,"C");
+        $pdf->Cell(50, 10, iconv('UTF-8', 'windows-1252', $nomEvaluation),1,0,"C");
         $pdf->Cell(23, 10, iconv('UTF-8', 'windows-1252', $coeficient),1,0,"C");
         $pdf->Cell(20, 10, iconv('UTF-8', 'windows-1252', $resultat),1,0,"C");
         $pdf->Ln();
