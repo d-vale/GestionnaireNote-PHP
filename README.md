@@ -13,3 +13,5 @@ Technologies Used
 
     Vanilla PHP
     Tailwind CSS
+    FPDF
+    SQLITE
