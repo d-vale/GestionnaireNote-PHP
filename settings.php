@@ -1,7 +1,6 @@
 <?php
 
-//Insertion du code php
-
+session_start();
 ?>
 
 <!doctype html>
@@ -76,13 +75,13 @@
                 <h2 class="text-xl font-bold text-center text-blue-900">Modifier votre profil</h1>
                     <div class="p-2">
 
-                        <form class="">
+                        <form class="" method="POST" action="">
                             <div class="grid md:gap-4 md:grid-cols-2 grid-cols-1 mb-3">
                                 <div>
                                     <label for="firstname" class="mb-3 block text-base font-medium">
                                         Prénom
                                     </label>
-                                    <input value="John" type="text" name="firstname" id="firstname"
+                                    <input value="<?php echo $_SESSION['prenom'] ?>" type="text" name="firstname" id="firstname"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                 </div>
 
@@ -90,7 +89,7 @@
                                     <label for="name" class="mb-3 block text-base font-medium">
                                         Nom
                                     </label>
-                                    <input value="Doe" type="text" name="name" id="name"
+                                    <input value="<?php echo $_SESSION['nom'] ?>" type="text" name="name" id="name"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white  text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                 </div>
 
@@ -98,7 +97,7 @@
                                     <label for="school" class="mb-3 block text-base font-medium">
                                         École
                                     </label>
-                                    <input value="HEIG-VD" type="text" name="school" id="school"
+                                    <input value="<?php echo $_SESSION['ecole'] ?>" type="text" name="school" id="school"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                 </div>
 
@@ -106,7 +105,7 @@
                                     <label for="sector" class="mb-3 block text-base font-medium">
                                         Filière
                                     </label>
-                                    <input value="COMEM" type="text" name="sector"
+                                    <input value="<?php echo $_SESSION['filiere'] ?>" type="text" name="sector"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white  text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                 </div>
 
@@ -114,25 +113,30 @@
                                     <label for="class" class="mb-3 block text-base font-medium">
                                         Classe
                                     </label>
-                                    <input value="M52-2" type="text" name="class" id="class"
+                                    <input value="<?php echo $_SESSION['classe'] ?>" type="text" name="class" id="class"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                 </div>
                                 <div>
                                     <label for="language" class="mb-3 block text-base font-medium">
                                         Langue de préférence
                                     </label>
+
                                     <select name="language" id="language"
                                         class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                                        <option class="font-light" selected>Choisir une langue</option>
-                                        <option value="french">Français</option>
-                                        <option value="english">Anglais</option>
+                                        <?php if ($_SESSION['langue'] === "french"){
+                                            echo '<option value="french" selected> Français </option>';
+                                            echo '<option value="english"> Anglais </option>';
+                                        } else {
+                                            echo '<option value="french"> Français </option>';
+                                            echo '<option value="english" selected> Anglais </option>';
+                                        } ?>
                                     </select>
                                 </div>
                                 <div>
                                     <label for="email" class="mb-3 block text-base font-medium">
                                         Adresse mail
                                     </label>
-                                    <input type="email" name="email" value="john.doe@gmail.com"
+                                    <input type="email" name="email" value="<?php echo $_SESSION['email'] ?>"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-whitetext-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                 </div>
                                 <div>
@@ -145,10 +149,48 @@
 
                             </div>
                             <div class="flex flex-col items-center pt-4">
-                                <button class="mt-2 mb-3 block py-2 px-6 rounded-full
+                                <button type="submit" name="submit" class="mt-2 mb-3 block py-2 px-6 rounded-full
                                      hover:bg-black bg-blue-900 text-md text-white font-bold">Modifier</button>
                             </div>
                         </form>
+                        <?php
+                        require_once("./config/autoload.php");
+
+                        use management\db\DbManager;
+                        use management\db\Utilisateur;
+
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+
+                            $dbManager = new DbManager();
+
+                            $utilisateur = new Utilisateur(
+                                $_POST['firstname'],
+                                $_POST['name'],
+                                $_POST['email'],
+                                $_POST['school'],
+                                $_POST['sector'],
+                                $_POST['class'],
+                                $_POST['password'],
+                                $_POST['language']
+                            );
+
+                            $utilisateur->definiId($_SESSION['id']);
+
+                            if ($dbManager->modifieUtilisateur($utilisateur)) {
+                                $_SESSION['prenom'] = $_POST['firstname'];
+                                $_SESSION['nom'] = $_POST['name'];
+                                $_SESSION['email'] = $_POST['email'];
+                                $_SESSION['ecole'] = $_POST['school'];
+                                $_SESSION['filiere'] = $_POST['sector'];
+                                $_SESSION['classe'] = $_POST['class'];
+                                $_SESSION['langue'] = $_POST['language'];
+                                echo '<p style="color: green" class="mt-3 text-center">Profil mis à jour avec succès</p>';
+                            } else {
+                                echo '<p style="color: red" class="mt-3 text-center">Erreur lors de la mise à jour du profil</p>';
+                            }
+                        }
+                        ?>
                         <div class="text-sm mt-4 flex flex-col items-center">
                             <a class="underline" href="./profil.php">Retour au profil</a>
                         </div>
