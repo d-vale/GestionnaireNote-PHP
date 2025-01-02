@@ -165,7 +165,7 @@
                 $password = $_POST['password'];
                 $password = password_hash($password, PASSWORD_DEFAULT);
 
-                $utilisateur = new Utilisateur($firstname, $name, $email, $school, $sector, $class, $language, $password);
+                $utilisateur = new Utilisateur($firstname, $name, $email, $school, $sector, $class, $password, $language);
                 $db->ajouteUtilisateur($utilisateur);
             }
             ?>

@@ -37,7 +37,7 @@ class Utilisateur {
      * @param string $id Identifiant de la personne
      * @throws Exception Lance une expection si un des paramètres n'est pas spécifié
      */
-    public function __construct(string $prenom, string $nom, string $email, string $ecole, string $filiere, string $classe, string $langue = "Français", string $password) {
+    public function __construct(string $prenom, string $nom, string $email, string $ecole, string $filiere, string $classe, string $password, string $langue = "Français") {
         if (empty($prenom)) {
             throw new Exception('Il faut un prénom');
         }

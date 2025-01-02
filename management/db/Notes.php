@@ -23,13 +23,7 @@ class Notes {
     private $utilisateur_id;
 
     /**
-     * Construit une nouvelle personne avec les paramètres spécifiés
-     * @param int $prenom Prénom
-     * @param string $nom Nom
-     * @param string $email Email
-     * @param string $noTel noTel
-     * @param string $id Identifiant de la personne
-     * @throws Exception Lance une expection si un des paramètres n'est pas spécifié
+     * Construit une nouvelle note avec des paramètres spécifiés
      */
     public function __construct(string $module, int $coeficient, string $nomCours,  float $note, string $nomEvaluation, int $utilisateur_id) {
         if (empty($module)) {
