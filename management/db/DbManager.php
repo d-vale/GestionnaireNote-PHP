@@ -198,6 +198,42 @@ COMMANDE_SQL;
         return $tabNotes;
     }
 
+    //Rend les notes avec un tri
+    public function rendNotesTriees(int $id, string $sortValue): array
+    {
+        //Attribution de la bonne requête selon la valeur de tri
+        if ($sortValue === 'date') {
+            $sql = "SELECT * From notes WHERE utilisateur_id =:id ORDER BY id DESC";
+        } else if ($sortValue === 'result') {
+            $sql = "SELECT * From notes WHERE utilisateur_id = :id ORDER BY note DESC";
+        } else {
+            $sql = "SELECT * From notes WHERE utilisateur_id = :id ORDER BY  module, nomCours ASC";
+        }
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam('id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $donnees = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $tabNotes = [];
+        if ($donnees) {
+            foreach ($donnees as $donneesNote) {
+                $n = new Notes(
+                    $donneesNote["module"],
+                    $donneesNote["coeficient"],
+                    $donneesNote["nomCours"],
+                    $donneesNote["note"],
+                    $donneesNote["nomEvaluation"],
+                    $donneesNote["utilisateur_id"],
+                    $donneesNote["id"]
+                );
+                $tabNotes[] = $n;
+            }
+        }
+        return $tabNotes;
+
+    }
+
+
     //Fonction pour supprimer un utilisateur
     public function supprimeUtilisateur(int $id): bool
     {

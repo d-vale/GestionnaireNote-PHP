@@ -10,10 +10,11 @@ use \ch\comem\I_ApiCRUD;
 use \ch\comem\Personne;
 
 $nom = $_SESSION['nom'];
+$sortValue = $_SESSION['sortValue'];
 $db = new DbManager();
 
-if($_SESSION["id"]) {
-    $tableauNote = $db->rendNotes($_SESSION["id"]);
+if($_SESSION['id']) {
+    $tableauNote = $db->rendNotesTriees($_SESSION["id"], $sortValue);
 
     $prenom = $_SESSION["prenom"];
     $nom = $_SESSION["nom"];
@@ -62,8 +63,6 @@ if($_SESSION["id"]) {
 
 
     }
-
-
 
     $pdf->Output();
 

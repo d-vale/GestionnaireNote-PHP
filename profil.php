@@ -2,6 +2,13 @@
 //Vérifier si l'utilisateur est connecté et a accès à la page
 session_start();
 
+//Traitement du filtrage des données à afficher, par défaut par date
+if (isset($_POST['sortTypes'])) {
+    $sortValue = $_POST['sortTypes'];
+} else {
+    $sortValue = "date";
+}
+$_SESSION['sortValue'] = $sortValue;
 ?>
 
 <!Doctype html>
@@ -93,7 +100,7 @@ session_start();
 
     <main
         class="items-center space-y-8 flex flex-grow flex-col bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
-        <!-- Protéction pour la page profil si l'utilisateur est login -->
+        <!-- Protection pour la page profil si l'utilisateur est login -->
         <?php
         require_once 'assets/protected.php';
 
@@ -107,7 +114,8 @@ session_start();
                         aria-label="Modifier le profil">Paramètres</a>
                     <div class="data row-span-3">
                         <div class="name text-lg font-bold mb-4 text-blue-900">
-                            <?php echo $_SESSION['prenom'] . " " . $_SESSION['nom'] ?></div>
+                            <?php echo $_SESSION['prenom'] . " " . $_SESSION['nom'] ?>
+                        </div>
                         <div class="school">École : <?php echo $_SESSION['ecole'] ?></div>
                         <div class="sector">Filière : <?php echo $_SESSION['filiere'] ?></div>
                         <div class="class">Classe : <?php echo $_SESSION['classe'] ?></div>
@@ -183,9 +191,36 @@ session_start();
                     ?>
             </div>
         </div>
-        <!--Tableau qui affiche les notes-->
 
-        <div class="" id="gradesArray">
+        <!--Formulaire pour trier les résultats-->
+        <div>
+            <form id="filterTable" name="filter" method="POST" class="items-center">
+                <div class="flex flex-col items-center">
+                    <div>
+                        <label for="sortTypes" class="mb-3 block text-sm font-medium">
+                            Trier les résultats:
+                        </label>
+                        <select name="sortTypes" id="sortTypes"
+                            class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white text-sm outline-none focus:border-[#6A64F1] focus:shadow-md">
+                            <option class="font-light" value="date" <?= $sortValue === 'date' ? 'selected' : '' ?>>Les plus récents</option>
+                            <option value="module" <?= $sortValue === 'module' ? 'selected' : '' ?>>par module et cours</option>
+                            <option value="result" <?= $sortValue === 'result' ? 'selected' : '' ?>>des meilleurs au moins bons</option>
+                        </select>
+                    </div>
+                    <div class="mt-2">
+                        <button type="submit" name="applyButton" id="applyButton"
+                            class="block text-sm rounded-full bg-blue-900 hover:bg-black text-white p-2">
+                            Appliquer
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+        <!--Tableau qui affiche les notes-->
+        <div class="overflow-hidden" id="gradesArray">
             <div class="flex items-center flex-center flex-col rounded-md">
                 <table
                     class="w-full text-md text-left rtl:text-right text-black dark:text-gray-400 m-9 border border-gray-200 shadow-lg">
@@ -212,7 +247,7 @@ session_start();
                         echo '<tbody class="divide-y divide-gray-200 text-black">';
 
                         // Vérifie si la table notes existe et si l'utilisateur a des notes
-                        $notes = $dbManager->rendNotes($_SESSION['id']);
+                        $notes = $dbManager->rendNotesTriees($_SESSION['id'], $sortValue);
                         if (!empty($notes)) {
                             foreach ($notes as $note) {
                                 echo '<tr>
@@ -238,7 +273,7 @@ session_start();
         <form action="./generate_pdf.php" method="post">
             <div class="flex flex-col items-center pt-2 pb-4">
                 <button type="submit" name="submit"
-                    class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">
+                    class="mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">
                     Exporter en PDF
                 </button>
             </div>

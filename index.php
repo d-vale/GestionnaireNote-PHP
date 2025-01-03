@@ -9,7 +9,7 @@
     <title>Gestionnaire de notes</title>
 </head>
 
-<body class="flex flex-col min-h-screen divide-y divide-gray-100 ">
+<body class="flex flex-col min-h-screen divide-gray-100 ">
 
     <!-- Header -->
     <header class="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
@@ -87,7 +87,7 @@
     </header>
 
     <!-- Contenu du Main -->
-    <main class="flex-grow bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+    <main class="max-w-screen flex-grow bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
         <div class="flex items-center justify-center">
             <section class="bg-cover bg-center py-32 w-full"
                 style="background-image: url('https://source.unsplash.com/random');">
