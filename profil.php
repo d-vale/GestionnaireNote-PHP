@@ -1,6 +1,14 @@
 <?php
 //Vérifier si l'utilisateur est connecté et a accès à la page
 session_start();
+require_once("./config/autoload.php");
+
+use management\db\DbManager;
+use management\db\Notes;
+
+$dbManager = new DbManager();
+$moyenne = $dbManager->rendMoyenneUtilisateur($_SESSION['id']);
+$taux = $dbManager->rendTauxUtilisateur($_SESSION['id']);
 
 //Traitement du filtrage des données à afficher, par défaut par date
 if (isset($_POST['sortTypes'])) {
@@ -126,11 +134,11 @@ $_SESSION['sortValue'] = $sortValue;
                 <div id="averages" class="flex flex-row gap-8 text-center">
                     <div class="averageBlock ">
                         <div class="averageTitle text-xl font-bold text-blue-900">Moyenne Générale</div>
-                        <div class="averageDisplay font-bold text-xl mt-2">5.3</div>
+                        <div class="averageDisplay font-bold text-xl mt-2"><?php echo $moyenne ?></div>
                     </div>
                     <div class="averageBlock">
                         <div class="averageTitle text-xl font-bold text-blue-900">Taux de Réussite Global</div>
-                        <div class="averageDisplay font-bold text-xl mt-2 ">89%</div>
+                        <div class="averageDisplay font-bold text-xl mt-2 "><?php echo round($taux,0) ?>%</div>
                     </div>
                 </div>
             </div>
@@ -165,10 +173,7 @@ $_SESSION['sortValue'] = $sortValue;
                     </div>
                     <?php
                     //Ajouter une note
-                    require_once("./config/autoload.php");
 
-                    use management\db\DbManager;
-                    use management\db\Notes;
 
                     if (isset($_POST['submit'])) {
                         $module = $_POST['module'];
@@ -178,7 +183,6 @@ $_SESSION['sortValue'] = $sortValue;
                         $note = $_POST['result'];
                         $utilisateur_id = $_SESSION['id'];
 
-                        $dbManager = new DbManager();
                         $newNote = new Notes($module, $coeficient, $nomCours, $note, $nomEvaluation, $utilisateur_id);
 
                         try {

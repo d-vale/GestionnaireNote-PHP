@@ -311,4 +311,82 @@ COMMANDE_SQL;
     //         echo '<p style="color: red" class="mt-3 text-center">Erreur de vérification</p>';
     //     }
     // }
+
+    public function rendTotalNbrUtilisateur()
+    {
+        $sql = "SELECT COUNT(*) as total FROM utilisateurs";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetch(\PDO::FETCH_ASSOC); // Récupère une seule ligne
+        return $data ? (int) $data['total'] : 0; // Retourne le total ou 0 si aucune donnée
+    }
+
+    public function rendMoyenneAll()
+    {
+        $sql = "SELECT AVG(note) AS moyenne FROM notes";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetch(\PDO::FETCH_ASSOC); // Récupère une seule ligne
+        return $data ? (float) $data['moyenne'] : 0.0; // Retourne la moyenne ou 0.0 si aucune donnée
+    }
+
+    public function rendTauxAll()
+    {
+        // Sélectionne le nombre de notes réussies
+        $sql1 = "SELECT COUNT(*) as notesReussies FROM notes WHERE note >= 4";
+        $stmt1 = $this->db->prepare($sql1);
+        $stmt1->execute();
+        $nbrNotesReussies = $stmt1->fetch(\PDO::FETCH_ASSOC);
+        // On convertit la valeur en entier ou on met 0 si aucun résultat
+        $nbrNotesReussies = $nbrNotesReussies ? (int) $nbrNotesReussies['notesReussies'] : 0;
+
+        // Sélectionne le total de nombre de notes
+        $sql2 = "SELECT COUNT(*) as total FROM notes";
+        $stmt2 = $this->db->prepare($sql2);
+        $stmt2->execute();
+        $nbrNotes = $stmt2->fetch(\PDO::FETCH_ASSOC);
+        // On convertit la valeur en entier ou on met 0 si aucun résultat
+        $nbrNotes = $nbrNotes ? (int) $nbrNotes['total'] : 0;
+
+        // Calcul du pourcentage, on évite la division par zéro
+        $pourcentage = ($nbrNotes > 0) ? ($nbrNotesReussies / $nbrNotes) * 100 : 0;
+
+        return $pourcentage;
+    }
+
+    public function rendMoyenneUtilisateur( $id)
+    {
+        $sql = "SELECT AVG(note) AS moyenne FROM notes WHERE utilisateur_id = :id ;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam('id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetch(\PDO::FETCH_ASSOC); // Récupère une seule ligne
+        return $data ? (float) $data['moyenne'] : 0.0; // Retourne la moyenne ou 0.0 si aucune donnée
+    }
+
+    public function rendTauxUtilisateur( $id)
+    {
+        $sql1 = "SELECT COUNT(*) as notesReussies FROM notes WHERE note >= 4 AND utilisateur_id =:id";
+        $stmt1 = $this->db->prepare($sql1);
+        $stmt1->bindParam('id', $id, \PDO::PARAM_INT);
+        $stmt1->execute();
+        $nbrNotesReussies = $stmt1->fetch(\PDO::FETCH_ASSOC);
+        // On convertit la valeur en entier ou on met 0 si aucun résultat
+        $nbrNotesReussies = $nbrNotesReussies ? (int) $nbrNotesReussies['notesReussies'] : 0;
+
+        // Sélectionne le total de nombre de notes
+        $sql2 = "SELECT COUNT(*) as total FROM notes WHERE utilisateur_id =:id";
+        $stmt2 = $this->db->prepare($sql2);
+        $stmt2->bindParam('id', $id, \PDO::PARAM_INT);
+        $stmt2->execute();
+        $nbrNotes = $stmt2->fetch(\PDO::FETCH_ASSOC);
+        // On convertit la valeur en entier ou on met 0 si aucun résultat
+        $nbrNotes = $nbrNotes ? (int) $nbrNotes['total'] : 0;
+
+        // Calcul du pourcentage, on évite la division par zéro
+        $pourcentage = ($nbrNotes > 0) ? ($nbrNotesReussies / $nbrNotes) * 100 : 0;
+
+        return $pourcentage;
+    }
+
 }

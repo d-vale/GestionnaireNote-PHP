@@ -1,5 +1,17 @@
 <?php
 session_start();
+require_once("./config/autoload.php");
+
+use management\db\DbManager;
+use management\db\Utilisateur;
+
+$db = new DbManager();
+
+//Calculs des différents chiffres de la page d'accueil
+$total = $db->rendTotalNbrUtilisateur();
+$moyenne = $db->rendMoyenneAll();
+$taux = $db->rendTauxAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -131,15 +143,15 @@ session_start();
             <div class="mx-auto max-w-7xl px-6 lg:px-8">
                 <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 text-center">
                     <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                        <dd class=" forder-first text-5xl font-semibold tracking-tight text-gray-900 ">24</dd>
+                        <dd class=" forder-first text-5xl font-semibold tracking-tight text-gray-900 "><?php echo $total?></dd>
                         <dt class="text-base text-gray-600">Nombre d'utilisateurs inscrits</dt>
                     </div>
                     <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                        <dd class="order-first text-5xl font-semibold tracking-tight text-gray-900 ">5.2</dd>
+                        <dd class="order-first text-5xl font-semibold tracking-tight text-gray-900 "><?php echo round($moyenne, 2)?></dd>
                         <dt class="text-base text-gray-600">Moyenne globale</dt>
                     </div>
                     <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                        <dd class="order-first text-5xl font-semibold tracking-tight text-gray-900">75%</dd>
+                        <dd class="order-first text-5xl font-semibold tracking-tight text-gray-900"><?php echo round($taux, 0)?>%</dd>
                         <dt class="text-base text-gray-600">Taux de réussite des évaluations</dt>
                     </div>
                 </dl>
