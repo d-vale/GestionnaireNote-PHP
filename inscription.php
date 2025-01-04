@@ -164,8 +164,9 @@
                 $email = $_POST['email'];
                 $password = $_POST['password'];
                 $password = password_hash($password, PASSWORD_DEFAULT);
+                $token = bin2hex(random_bytes(32));
 
-                $utilisateur = new Utilisateur($firstname, $name, $email, $school, $sector, $class, $password, $language);
+                $utilisateur = new Utilisateur($firstname, $name, $email, $school, $sector, $class, $password, $token, false, $language);
                 $db->ajouteUtilisateur($utilisateur);
             }
             ?>

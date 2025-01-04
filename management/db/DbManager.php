@@ -32,7 +32,9 @@ class DbManager implements I_ApiCRUD
                 filiere VARCHAR(120) NOT NULL,
                 classe VARCHAR(20) NOT NULL,
                 langue VARCHAR(40) NOT NULL,
-                password VARCHAR(255) NOT NULL
+                password VARCHAR(255) NOT NULL,
+                token VARCHAR(350) NOT NULL,
+                verify BOOLEAN NOT NULL DEFAULT 0
             );
 COMMANDE_SQL;
 
@@ -85,14 +87,16 @@ COMMANDE_SQL;
             'classe' => $utilisateur->rendClasse(),
             'langue' => $utilisateur->rendLangue(),
             'password' => $utilisateur->rendPassword(),
+            'token' => $utilisateur->rendToken(),
+            'verify' => $utilisateur->rendVerify(),
         ];
-        $sql = "INSERT INTO utilisateurs (prenom, nom, email, ecole, filiere, classe, langue, password) VALUES "
-            . "(:prenom, :nom, :email, :ecole, :filiere, :classe, :langue, :password);";
+        $sql = "INSERT INTO utilisateurs (prenom, nom, email, ecole, filiere, classe, langue, password, token, verify) VALUES "
+            . "(:prenom, :nom, :email, :ecole, :filiere, :classe, :langue, :password, :token, :verify);";
         $this->db->prepare($sql)->execute($datas);
         echo '<p style="color: green" class="mt-3 text-center">Utilisateur ajouté</p>';
 
-        //Envoie du mail de vérification du mail avec le token personnalisé dans le lien
-        // include('MailSender_Manager.php');
+        // Envoie du mail de vérification du mail avec le token personnalisé dans le lien
+        include('./management/mail/MailSender_Manager.php');
 
         return $this->db->lastInsertId();
     }
@@ -164,6 +168,8 @@ COMMANDE_SQL;
                     $donneesUtilisateur["classe"],
                     $donneesUtilisateur["langue"],
                     $donneesUtilisateur["password"],
+                    $donneesUtilisateur["token"],
+                    $donneesUtilisateur["verify"],
                     $donneesUtilisateur["id"]
                 );
                 $tabUtilisateurs[] = $p;
@@ -266,7 +272,7 @@ COMMANDE_SQL;
 
             if ($stmt->execute()) {
                 $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-                if ($result && password_verify($password, $result['password'])) {
+                if ($result && password_verify($password, $result['password']) && $result['verify'] == 1) {
                     session_start();
                     $_SESSION['email'] = $email;
                     $_SESSION['prenom'] = $result['prenom'];
@@ -288,28 +294,28 @@ COMMANDE_SQL;
         }
     }
 
-    // //Fonction pour vérifier le token de l'utilisateur
-    // public function verifyToken(string $token): void
-    // {
-    //     $sql = "SELECT * FROM utilisateurs WHERE token = :token";
-    //     $stmt = $this->db->prepare($sql);
-    //     $stmt->bindParam(':token', $token);
+    //Fonction pour vérifier le token de l'utilisateur
+    public function verifyToken(string $token): void
+    {
+        $sql = "SELECT * FROM utilisateurs WHERE token = :token";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':token', $token);
 
-    //     if ($stmt->execute()) {
-    //         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-    //         if ($result) {
-    //             $sql = "UPDATE utilisateurs SET verify = 1 WHERE token = :token";
-    //             $stmt = $this->db->prepare($sql);
-    //             $stmt->bindParam(':token', $token);
-    //             $stmt->execute();
-    //             echo '<p style="color: green" class="mt-3 text-center">Email vérifié</p>';
-    //         } else {
-    //             echo '<p style="color: red" class="mt-3 text-center">Erreur de vérification</p>';
-    //         }
-    //     } else {
-    //         echo '<p style="color: red" class="mt-3 text-center">Erreur de vérification</p>';
-    //     }
-    // }
+        if ($stmt->execute()) {
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+            if ($result) {
+                $sql = "UPDATE utilisateurs SET verify = 1 WHERE token = :token";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(':token', $token);
+                $stmt->execute();
+                echo '<p style="color: green" class="mt-3 text-center">Email vérifié</p>';
+            } else {
+                echo '<p style="color: red" class="mt-3 text-center">Erreur de vérification</p>';
+            }
+        } else {
+            echo '<p style="color: red" class="mt-3 text-center">Erreur de vérification</p>';
+        }
+    }
 
     public function rendTotalNbrUtilisateur()
     {

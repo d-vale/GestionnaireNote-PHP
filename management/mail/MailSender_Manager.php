@@ -13,7 +13,7 @@ $email = (new Email())
     ->to($utilisateur->rendEmail())
     ->subject('Vérification de votre compte')
     ->html('<h1>Merci de vérifier votre compte</h1>
-            <a href="http://localhost/ProgServ2/ExerciceVerifMail/verify.php?token='
+            <a href="http://localhost/ProgServ2/GestionnaireNote-PHP/verify.php?token='
             . $utilisateur->rendToken()
             . '">Cliquez ici pour vérifier votre compte</a>');
 $result = $mailer->send($email);
