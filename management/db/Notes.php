@@ -12,7 +12,8 @@ use \Exception;
  *  - une note
  *  - l'id d'un utilisateur
  */
-class Notes {
+class Notes
+{
 
     private $id;
     private $module;
@@ -25,30 +26,34 @@ class Notes {
     /**
      * Construit une nouvelle note avec des paramètres spécifiés
      */
-    public function __construct(string $module, int $coeficient, string $nomCours,  float $note, string $nomEvaluation, int $utilisateur_id) {
+    public function __construct(string $module, int $coeficient, string $nomCours,  float $note, string $nomEvaluation, int $utilisateur_id)
+    {
         if (empty($module)) {
-            throw new Exception('Il faut un module');
+            echo ('Il faut un module');
         }
         if (empty($nomEvaluation)) {
-            throw new Exception('Il faut un nom d\'évaluation');
+            echo ('Il faut un nom d\'évaluation');
         }
         if (empty($coeficient)) {
-            throw new Exception('Il faut un coeficient');
+            echo ('Il faut un coeficient');
+        }
+        if ($coeficient < 1 || $coeficient > 100) {
+            echo ('Il faut un coeficient entre 1 et 100 sans le % (ex: 20)');
         }
         if (empty($nomCours)) {
-            throw new Exception('Il faut un nom de cours');
+            echo ('Il faut un nom de cours');
         }
         if (empty($coeficient)) {
-            throw new Exception('Il faut un coeficient');
+            echo ('Il faut un coeficient');
         }
         if (empty($note)) {
-            throw new Exception('Il faut une note');
+            echo ('Il faut une note');
         }
-        if($note < 0 || $note > 6){
-            throw new Exception('La note doit être comprise entre 0 et 6');
+        if ($note < 0 || $note > 6) {
+            echo ('La note doit être comprise entre 0 et 6');
         }
         if (empty($utilisateur_id)) {
-            throw new Exception('Il faut un utilisateur_id');
+            throw new Exception('Erreur lors de la création de la note');
         }
 
         $this->module = $module;
@@ -60,72 +65,82 @@ class Notes {
     }
 
     /**
-     * Rend l'id de la note
-     */
-    public function rendId(): int {
-        return $this->id;
-    }
-
-    /**
      * Defini l'id de la note
      */
-    public function definiId($id): void {
+    public function definiId($id): void
+    {
         if ($id > 0) {
             $this->id = $id;
         }
     }
 
     /**
+     * Rend l'id de la note
+     */
+    public function rendId(): int
+    {
+        return $this->id;
+    }
+
+    /**
      * Rend le nom du cours
      */
-    public function rendNomCours(): string {
+    public function rendNomCours(): string
+    {
         return $this->nomCours;
     }
 
     /**
      * Rend le coeficient
      */
-    public function rendCoeficient(): int {
+    public function rendCoeficient(): int
+    {
         return $this->coeficient;
     }
 
     /**
      * Rend la note
      */
-    public function rendNote(): float {
+    public function rendNote(): float
+    {
         return $this->note;
     }
-    
+
     /**
      * Rend le module
      */
-    public function rendModule(): string {
+    public function rendModule(): string
+    {
         return $this->module;
     }
 
     /**
      * Rend le nom de l'évaluation
      */
-    public function rendNomEvaluation(): string {
+    public function rendNomEvaluation(): string
+    {
         return $this->nomEvaluation;
     }
 
     /**
      * Rend l'id de l'utilisateur
      */
-    public function rendUtilisateurId(): int {
+    public function rendUtilisateurId(): int
+    {
         return $this->utilisateur_id;
     }
 
     /**
      * Rend une description de la note
      */
-    public function __toString(): string {
+    public function __toString(): string
+    {
         return $this->id . " " .
+            $this->module . " " .
+            $this->nomEvaluation . " " .
             $this->nomCours . " " .
             $this->coeficient . " " .
             $this->note . " " .
             $this->utilisateur_id;
     }
-
 }

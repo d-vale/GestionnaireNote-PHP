@@ -27,6 +27,8 @@ class Utilisateur {
     private $classe;
     private $langue;
     private $password;
+    private $token;
+    private $verify;
 
     /**
      * Construit une nouvelle personne avec les paramètres spécifiés
@@ -37,30 +39,33 @@ class Utilisateur {
      * @param string $id Identifiant de la personne
      * @throws Exception Lance une expection si un des paramètres n'est pas spécifié
      */
-    public function __construct(string $prenom, string $nom, string $email, string $ecole, string $filiere, string $classe, string $password, string $langue = "Français") {
+    public function __construct(string $prenom, string $nom, string $email, string $ecole, string $filiere, string $classe, string $password, string $token, bool $verify = false, string $langue = "Français") {
         if (empty($prenom)) {
-            throw new Exception('Il faut un prénom');
+            echo('Il faut un prénom');
         }
         if (empty($nom)) {
-            throw new Exception('Il faut un nom');
+            echo('Il faut un nom');
         }
         if (empty($email)) {
-            throw new Exception('Il faut un email');
+            echo('Il faut un email');
         }
         if (empty($ecole)) {
-            throw new Exception('Il faut une école');
+            echo('Il faut une école');
         }
         if (empty($filiere)) {
-            throw new Exception('Il faut une filière');
+            echo('Il faut une filière');
         }
         if (empty($classe)) {
-            throw new Exception('Il faut une classe');
+            echo('Il faut une classe');
         }
         if (empty($langue)) {
-            throw new Exception('Il faut une langue');
+            echo('Il faut une langue');
+        }
+        if (empty($token)) {
+            echo('Erreur de génération de token');
         }
         if (empty($password)) {
-            throw new Exception('Il faut un mot de passe');
+            echo('Il faut un mot de passe');
         }
 
         $this->prenom = $prenom;
@@ -71,6 +76,8 @@ class Utilisateur {
         $this->classe = $classe;
         $this->langue = $langue;
         $this->password = $password;
+        $this->token = $token;
+        $this->verify = $verify;
     }
 
     /**
@@ -147,6 +154,20 @@ class Utilisateur {
     }
 
     /**
+     * Rend le token
+     */
+    public function rendToken(): string {
+        return $this->token;
+    }
+
+    /**
+     * Rend le verify
+     */
+    public function rendVerify(): bool {
+        return $this->verify;
+    }
+
+    /**
      * Rend une description complète de la personne
      */
     public function __toString(): string {
@@ -158,7 +179,9 @@ class Utilisateur {
                 $this->filiere . " " .
                 $this->classe . " " .
                 $this->langue . " " .
-                $this->password;
+                $this->password . " " .
+                $this->token . " " .
+                $this->verify;
     }
 
 }

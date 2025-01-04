@@ -8,10 +8,9 @@ use management\db\Notes;
 
 $dbManager = new DbManager();
 
-if(isset($_SESSION['id'])) {
+if (isset($_SESSION['id'])) {
     $moyenne = $dbManager->rendMoyenneUtilisateur($_SESSION['id']);
     $taux = $dbManager->rendTauxUtilisateur($_SESSION['id']);
-    
 }
 
 //Traitement du filtrage des données à afficher, par défaut par date
@@ -62,7 +61,7 @@ $_SESSION['sortValue'] = $sortValue;
                     <div class="hidden sm:ml-6 sm:block">
                         <?php
                         //Vérifier si l'utilisateur est connecté et a accès à la page
-                        
+
                         if (!isset($_SESSION['email'])) {
                             echo '';
                         } else {
@@ -138,11 +137,11 @@ $_SESSION['sortValue'] = $sortValue;
                 <div id="averages" class="flex flex-row gap-8 text-center">
                     <div class="averageBlock ">
                         <div class="averageTitle text-xl font-bold text-blue-900">Moyenne Générale</div>
-                        <div class="averageDisplay font-bold text-xl mt-2"><?php echo round($moyenne,1 )?></div>
+                        <div class="averageDisplay font-bold text-xl mt-2"><?php echo round($moyenne, 1) ?></div>
                     </div>
                     <div class="averageBlock">
                         <div class="averageTitle text-xl font-bold text-blue-900">Taux de Réussite Global</div>
-                        <div class="averageDisplay font-bold text-xl mt-2 "><?php echo round($taux,0) ?>%</div>
+                        <div class="averageDisplay font-bold text-xl mt-2 "><?php echo round($taux, 0) ?>%</div>
                     </div>
                 </div>
             </div>
@@ -187,13 +186,16 @@ $_SESSION['sortValue'] = $sortValue;
                         $note = $_POST['result'];
                         $utilisateur_id = $_SESSION['id'];
 
-                        $newNote = new Notes($module, $coeficient, $nomCours, $note, $nomEvaluation, $utilisateur_id);
-
-                        try {
-                            $dbManager->creeTableNotes();
-                            $dbManager->ajouteNotes($newNote);
-                        } catch (\PDOException $e) {
-                            echo '<div class="text-center text-red-500">Erreur lors de l\'ajout de la note</div>';
+                        if (!is_numeric($coeficient)) {
+                            echo ('Il faut un coeficient sans le % (ex: 20)'); //Eviter une erreur si le coeficient n'est pas un nombre
+                        } else {
+                            $newNote = new Notes($module, $coeficient, $nomCours, $note, $nomEvaluation, $utilisateur_id);
+                            try {
+                                $dbManager->creeTableNotes();
+                                $dbManager->ajouteNotes($newNote);
+                            } catch (\PDOException $e) {
+                                echo '<div class="text-center text-red-500">Erreur lors de l\'ajout de la note</div>';
+                            }
                         }
                     }
                     ?>
@@ -260,7 +262,7 @@ $_SESSION['sortValue'] = $sortValue;
                             foreach ($notes as $note) {
                                 echo '<tr>
                                     <td class="px-6 py-4 text-center">
-                                        <button class="text-red-700 ring-red-700 hover:text-white hover:bg-red-700 ring-2 font-bold rounded-lg text-sm px-4 py-2 text-center">X</button>
+                                        <a href="deletenote.php?id=' . $dbManager->rendIdNote($note->rendNomCours(), $note->rendModule(), $note->rendNomEvaluation(), $note->rendUtilisateurId()) . '"><button class="text-red-700 ring-red-700 hover:text-white hover:bg-red-700 ring-2 font-bold rounded-lg text-sm px-4 py-2 text-center">X</button></a>
                                     </td>
                                     <td class="px-6 py-4 text-center">' . $note->rendNomCours() . '</td>
                                     <td class="px-6 py-4 text-center">' . $note->rendModule() . '</td>
@@ -276,7 +278,6 @@ $_SESSION['sortValue'] = $sortValue;
                         ?>
                 </table>
             </div>
-
         </div>
         <form action="./generate_pdf.php" method="post">
             <div class="flex flex-col items-center pt-2 pb-4">

@@ -422,4 +422,18 @@ COMMANDE_SQL;
         }
         return 0;
     }
+
+    //Rend l'id de la note selon le nom du cours, le module, le nom de l'évaluation et l'id de l'utilisateur
+    public function rendIdNote(string $nomCours, string $module, string $nomEvaluation, int $idUtilisateur): int
+    {
+        $sql = "SELECT id FROM notes WHERE nomCours = :nomCours AND module = :module AND nomEvaluation = :nomEvaluation AND utilisateur_id = :idUtilisateur";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam('nomCours', $nomCours, \PDO::PARAM_STR);
+        $stmt->bindParam('module', $module, \PDO::PARAM_STR);
+        $stmt->bindParam('nomEvaluation', $nomEvaluation, \PDO::PARAM_STR);
+        $stmt->bindParam('idUtilisateur', $idUtilisateur, \PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $data ? (int) $data['id'] : 0;
+    }
 }
