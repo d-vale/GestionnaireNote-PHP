@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -59,9 +63,8 @@
     <main class="mb-0 flex-grow bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
 
         <div class="mt-24 flex flex-col">
-            <h1 class="pt-6 text-center text-5xl mb-6 font-bold">Inscrivez-vous à la plateforme</h1>
-            <p class="pt-6 text-center">Répertoriez vos notes dès maintenant dans votre profil personnalisé après à une
-                inscription simple et efficace.</p>
+            <h1 class="pt-6 text-center text-5xl mb-6 font-bold"><?php echo t('signupPlatform') ?></h1>
+            <p class="pt-6 text-center"><?php echo t('signupDescription') ?></p>
         </div>
 
         <!-- Formulaire -->
@@ -72,7 +75,7 @@
                 <div class="grid md:gap-4 md:grid-cols-2 grid-cols-1" style="margin-bottom:  5rem;">
                     <div>
                         <label for="firstname" class="mb-3 block text-base font-medium">
-                            Prénom
+                            <?php echo t('firstName') ?>
                         </label>
                         <input type="text" name="firstname" id="firstname"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -80,7 +83,7 @@
 
                     <div>
                         <label for="name" class="mb-3 block text-base font-medium">
-                            Nom
+                            <?php echo t('lastName') ?>
                         </label>
                         <input type="text" name="name" id="name"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white  text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -88,7 +91,7 @@
 
                     <div>
                         <label for="school" class="mb-3 block text-base font-medium">
-                            École
+                            <?php echo t('school') ?>
                         </label>
                         <input type="text" name="school" id="school"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -96,7 +99,7 @@
 
                     <div>
                         <label for="sector" class="mb-3 block text-base font-medium">
-                            Filière
+                            <?php echo t('field') ?>
                         </label>
                         <input type="text" name="sector"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white  text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -104,31 +107,31 @@
 
                     <div>
                         <label for="class" class="mb-3 block text-base font-medium">
-                            Classe
+                            <?php echo t('class') ?>
                         </label>
                         <input type="text" name="class" id="class"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                     <div>
                         <label for="language" class="mb-3 block text-base font-medium">
-                            Langue de préférence
+                            <?php echo t('prefLanguage') ?> 
                         </label>
                         <select name="language" id="language" class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                            <option class="font-light" selected>Choisir une langue</option>
-                            <option value="french">Français</option>
-                            <option value="english">Anglais</option>
+                            <option class="font-light" selected><?php echo t('chooseLang')?></option>
+                            <option value="french"><?php echo t('french')?></option>
+                            <option value="english"><?php echo t('english')?></option>
                         </select>
                     </div>
                     <div>
                         <label for="email" class="mb-3 block text-base font-medium">
-                            Adresse mail
+                        <?php echo t('email')?>
                         </label>
                         <input type="email" name="email"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-whitetext-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                     <div>
                         <label for="password" class="mb-3 block text-base font-medium">
-                            Mot de passe
+                        <?php echo t('password')?>
                         </label>
                         <input type="password" name="password"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -138,7 +141,7 @@
                 <div class="mt-18">
                     <button id="subscribe"
                         class="block text-basme font-medium rounded-full bg-blue-900 hover:bg-black text-lg text-white p-3">
-                        S'inscrire
+                        <?php echo t('signup')?>
                     </button>
                 </div>
 
@@ -207,7 +210,7 @@
                             Langues du site
                         </p>
                         <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                            <?php 
+                            <?php
                             echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=fr" class="hover:opacity-75 hover:text-blue-800">Français</a>';
                             echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=en" class="hover:opacity-75 hover:text-blue-800">Anglais</a>'
                             ?>

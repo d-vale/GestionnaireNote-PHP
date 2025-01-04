@@ -26,7 +26,7 @@ function t($key)
  * @param string $defaultLanguage
  * @return string
  */
-function getLanguage($defaultLanguage = 'en')
+function getLanguage($defaultLanguage = 'fr')
 {
     $language = null;
 
@@ -58,7 +58,7 @@ function getLanguage($defaultLanguage = 'en')
  * @param string $defaultLanguage
  * @return int|string
  */
-function getLanguageFromBrowser($defaultLanguage = 'en')
+function getLanguageFromBrowser($defaultLanguage = 'fr')
 {
     $languages = [];
     if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {

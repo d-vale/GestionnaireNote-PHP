@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("./config/autoload.php");
+require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
 
 use management\db\DbManager;
 use management\db\Utilisateur;
@@ -110,18 +111,19 @@ $taux = $db->rendTauxAll();
                 <div class="container mx-auto text-center text-black max-w-7xl px-2 sm:px-6 lg:px-8">
                     <div class="flex flex-col md:flex-row items-center justify-center gap-8">
                         <div class="text-center md:text-left">
-                            <h1 class="text-5xl mb-6 font-bold">Votre gestionnaire de notes</h1>
-                            <p class="text-xl mb-12">Grâce à ce site, suivez votre avancée dans l'année scolaire,
-                                répertoriez vos notes et calculez vos moyennes.</p>
+                            <h1 class="text-5xl mb-6 font-bold"><?php echo t('yourGrades') ?></h1>
+                            <p class="text-xl mb-12"><?php echo t('followProgress') ?></p>
                             <?php
                             if (!isset($_SESSION['email'])) {
                                 echo '<div class="flex flex-col md:flex-row gap-4">
                                 <a href="./inscription.php"
-                                    class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">S&#39;inscrire</a>
-                                <a href="./connection.php"
-                                    class="text-black py-4 px-12 rounded-full hover:text-blue-900">Déjà inscrit ? Se
-                                    connecter</a>
-                            </div>';
+                                    class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">';
+                                echo t('register');
+                                echo '</a>';
+                                echo '<a href="./connection.php"
+                                    class="text-black py-4 px-12 rounded-full hover:text-blue-900">';
+                                echo t('alreadyRegistered');
+                                echo '</a></div>';
                             } else {
                                 echo '';
                             }
@@ -137,22 +139,22 @@ $taux = $db->rendTauxAll();
             </section>
         </div>
         <h1 class="text-center text-4xl mb-12 text-blue-800 font-bold">
-            Les statistiques de nos utilisateurs et utilisatrices
+            <?php echo t('userStats') ?> 
         </h1>
         <div class="py-12 sm:py-16 w-full">
             <div class="mx-auto max-w-7xl px-6 lg:px-8">
                 <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 text-center">
                     <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                        <dd class=" forder-first text-5xl font-semibold tracking-tight text-gray-900 "><?php echo $total?></dd>
-                        <dt class="text-base text-gray-600">Nombre d'utilisateurs inscrits</dt>
+                        <dd class=" forder-first text-5xl font-semibold tracking-tight text-gray-900 "><?php echo $total ?></dd>
+                        <dt class="text-base text-gray-600"><?php echo t('registeredUsers')?></dt>
                     </div>
                     <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                        <dd class="order-first text-5xl font-semibold tracking-tight text-gray-900 "><?php echo round($moyenne, 2)?></dd>
-                        <dt class="text-base text-gray-600">Moyenne globale</dt>
+                        <dd class="order-first text-5xl font-semibold tracking-tight text-gray-900 "><?php echo round($moyenne, 2) ?></dd>
+                        <dt class="text-base text-gray-600"><?php echo t('globalAverage')?></dt>
                     </div>
                     <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                        <dd class="order-first text-5xl font-semibold tracking-tight text-gray-900"><?php echo round($taux, 0)?>%</dd>
-                        <dt class="text-base text-gray-600">Taux de réussite des évaluations</dt>
+                        <dd class="order-first text-5xl font-semibold tracking-tight text-gray-900"><?php echo round($taux, 0) ?>%</dd>
+                        <dt class="text-base text-gray-600"><?php echo t('successRate')?></dt>
                     </div>
                 </dl>
             </div>
@@ -194,7 +196,7 @@ $taux = $db->rendTauxAll();
                             Langues du site
                         </p>
                         <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                            <?php 
+                            <?php
                             echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=fr" class="hover:opacity-75 hover:text-blue-800">Français</a>';
                             echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=en" class="hover:opacity-75 hover:text-blue-800">Anglais</a>'
                             ?>
