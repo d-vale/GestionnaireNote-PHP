@@ -2,6 +2,7 @@
 //Vérifier si l'utilisateur est connecté et a accès à la page
 session_start();
 require_once("./config/autoload.php");
+require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
 
 use management\db\DbManager;
 use management\db\Notes;
@@ -130,7 +131,7 @@ $_SESSION['sortValue'] = $sortValue;
                         <img src="./assets/logo2.svg" class="mr-5 h-6 sm:h-9" alt="Projet PHP" />
                     </a>
                     <p class="max-w-xs mt-4 text-sm text-gray-600">
-                        Ce site est un projet réalisé dans le cadre d'un cours de PHP à la HEIG-VD.
+                    <?php echo t('aboutProject')?>
                     </p>
                     <div class="flex mt-8 space-x-6 text-gray-600">
                         <a class="hover:opacity-75 hover:text-blue-800"
@@ -149,12 +150,16 @@ $_SESSION['sortValue'] = $sortValue;
                 <div class="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <p class="font-medium">
-                            Langues du site
+                        <?php echo t('siteLanguages')?>
                         </p>
                         <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
                             <?php 
-                            echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=fr" class="hover:opacity-75 hover:text-blue-800">Français</a>';
-                            echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=en" class="hover:opacity-75 hover:text-blue-800">Anglais</a>'
+                            echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=fr" class="hover:opacity-75 hover:text-blue-800">';
+                            echo t('french');
+                            echo '</a>';
+                            echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=en" class="hover:opacity-75 hover:text-blue-800">';
+                            echo t('english');
+                            echo '</a>';
                             ?>
                         </nav>
                     </div>

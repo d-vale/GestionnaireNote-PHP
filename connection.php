@@ -118,7 +118,7 @@ if (isset($_POST['submit'])) {
                         <img src="./assets/logo2.svg" class="mr-5 h-6 sm:h-9" alt="Projet PHP" />
                     </a>
                     <p class="max-w-xs mt-4 text-sm text-gray-600">
-                        Ce site est un projet réalisé dans le cadre d'un cours de PHP à la HEIG-VD.
+                    <?php echo t('aboutProject')?>
                     </p>
                     <div class="flex mt-8 space-x-6 text-gray-600">
                         <a class="hover:opacity-75 hover:text-blue-800"
@@ -137,12 +137,16 @@ if (isset($_POST['submit'])) {
                 <div class="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <p class="font-medium">
-                            Langues du site
+                        <?php echo t('siteLanguages')?>
                         </p>
                         <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                            <?php
-                            echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=fr" class="hover:opacity-75 hover:text-blue-800">Français</a>';
-                            echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=en" class="hover:opacity-75 hover:text-blue-800">Anglais</a>'
+                            <?php 
+                            echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=fr" class="hover:opacity-75 hover:text-blue-800">';
+                            echo t('french');
+                            echo '</a>';
+                            echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=en" class="hover:opacity-75 hover:text-blue-800">';
+                            echo t('english');
+                            echo '</a>';
                             ?>
                         </nav>
                     </div>
