@@ -127,11 +127,11 @@ session_start();
                                     <select name="language" id="language"
                                         class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
                                         <?php if ($_SESSION['langue'] === "french") {
-                                            echo '<option value="french" selected> Français </option>';
-                                            echo '<option value="english"> Anglais </option>';
+                                            echo '<option value="french" selected>Français</option>';
+                                            echo '<option value="english">Anglais</option>';
                                         } else {
-                                            echo '<option value="french"> Français </option>';
-                                            echo '<option value="english" selected> Anglais </option>';
+                                            echo '<option value="french">Français</option>';
+                                            echo '<option value="english" selected>Anglais</option>';
                                         } ?>
                                     </select>
                                 </div>
@@ -167,6 +167,9 @@ session_start();
 
                             $dbManager = new DbManager();
 
+                            $password = $_POST['password'];
+                            $password = password_hash($password, PASSWORD_DEFAULT);
+
                             $utilisateur = new Utilisateur(
                                 $_POST['firstname'],
                                 $_POST['name'],
@@ -174,7 +177,7 @@ session_start();
                                 $_POST['school'],
                                 $_POST['sector'],
                                 $_POST['class'],
-                                $_POST['password'],
+                                $password,
                                 $_POST['language']
                             );
 
