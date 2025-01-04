@@ -106,8 +106,10 @@
                             Langues du site
                         </p>
                         <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                            <a href="#" class="hover:opacity-75 hover:text-blue-800">Français</a>
-                            <a href="#" class="hover:opacity-75 hover:text-blue-800">Anglais</a>
+                            <?php 
+                            echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=fr" class="hover:opacity-75 hover:text-blue-800">Français</a>';
+                            echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=en" class="hover:opacity-75 hover:text-blue-800">Anglais</a>'
+                            ?>
                         </nav>
                     </div>
                 </div>
@@ -118,6 +120,7 @@
             </p>
         </div>
     </footer>
+
 
 
     <script>

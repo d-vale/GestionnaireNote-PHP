@@ -107,7 +107,7 @@ if(isset($_POST['submit'])){
 
 
     <!-- Footer -->
-    <footer class="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100 bottom-0">
+    <footer class=" bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100 bottom-0">
         <div class="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
                 <!-- Première colonne -->
@@ -138,8 +138,10 @@ if(isset($_POST['submit'])){
                             Langues du site
                         </p>
                         <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                            <a href="#" class="hover:opacity-75 hover:text-blue-800">Français</a>
-                            <a href="#" class="hover:opacity-75 hover:text-blue-800">Anglais</a>
+                            <?php 
+                            echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=fr" class="hover:opacity-75 hover:text-blue-800">Français</a>';
+                            echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=en" class="hover:opacity-75 hover:text-blue-800">Anglais</a>'
+                            ?>
                         </nav>
                     </div>
                 </div>
@@ -150,6 +152,7 @@ if(isset($_POST['submit'])){
             </p>
         </div>
     </footer>
+
 
 
     <script>
