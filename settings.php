@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 ?>
 
@@ -66,6 +65,10 @@ session_start();
 
     <main
         class="items-center space-y-8 flex flex-grow flex-col bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+        <!-- Protection pour la page profil si l'utilisateur est login -->
+        <?php
+        require_once 'assets/protected.php';
+        ?>
         <div class="mt-8 p-8 bg-gray-100 rounded-md drop-shadow-lg">
 
             <h1 class="text-4xl font-bold text-center ">Paramètres</h1>
@@ -123,7 +126,7 @@ session_start();
 
                                     <select name="language" id="language"
                                         class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                                        <?php if ($_SESSION['langue'] === "french"){
+                                        <?php if ($_SESSION['langue'] === "french") {
                                             echo '<option value="french" selected> Français </option>';
                                             echo '<option value="english"> Anglais </option>';
                                         } else {
