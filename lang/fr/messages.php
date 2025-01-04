@@ -1,6 +1,11 @@
 <?php
 return array(
     //Header
+    'title' => "Gestionnaire de notes",
+    'myProfile' => "Mon Profil",
+    'logout' => "Se déconnecter",
+    'login' => "Se connecter",
+    'signup' => "S'inscrire",
 
     //Footer
     'aboutProject' => "Ce site est un projet réalisé dans le cadre d'un cours de PHP à la HEIG-VD.",
@@ -57,5 +62,10 @@ return array(
     'sortByModuleAndCurs' => "Par module et cours",
     'sortByBest' => "Des meilleurs au moins bons",
     'noNotes' => "Aucune note n'a été ajoutée",
-    'exportPDF' => "Exporter en PDF"
+    'exportPDF' => "Exporter en PDF",
+
+    //Settings page
+    'modifyProfile' => "Modifier votre profil",
+    'modify' => "Modifier",
+    'backProfil' => "Retour au profil",
 );

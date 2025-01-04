@@ -23,18 +23,19 @@ if (isset($_POST['sortTypes'])) {
 $_SESSION['sortValue'] = $sortValue;
 ?>
 
-<!Doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="styles/output.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="/assets/logo.svg" />
-    <title>Gestionnaire de notes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/output.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/logo.svg">
+    <title><?php echo t('title')?></title>
 </head>
 
-<body class="flex min-h-screen flex-col divide-y divide-gray-100">
+<body class="flex flex-col min-h-screen divide-gray-100 ">
+
     <!-- Header -->
     <header class="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
         <nav class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -67,7 +68,9 @@ $_SESSION['sortValue'] = $sortValue;
                             echo '';
                         } else {
                             echo '<div class="flex space-x-4">
-                            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">Mon Profil</a>
+                            <a href="./profil.php" class="font-medium rounded-md px-3 py-2 text-sm hover:text-blue-900">';
+                            echo t('myProfile');
+                            echo'</a>
                         </div>';
                         }
                         ?>
@@ -81,15 +84,20 @@ $_SESSION['sortValue'] = $sortValue;
                 if (!isset($_SESSION['email'])) {
                     echo '<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <a href="./connection.php"
-                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">Se connecter</a>
+                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">';
+                       echo t('login');
+                        echo '</a>
                     <a href="./inscription.php"
-                        class="rounded-full -md bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm font-medium text-white">S&#39;inscrire</a>
+                        class="rounded-full -md bg-blue-800 hover:bg-blue-900 px-3 py-2 text-sm font-medium text-white">';
+                        echo t('signup');
+                        echo '</a>
                 </div>';
                 } else {
                     echo '<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <a href="logout.php"
-                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">Se
-                        déconnecter</a>
+                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">';
+                        echo t('logout');
+                        echo '</a>
                 </div>';
                 }
                 ?>

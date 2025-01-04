@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles/output.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/assets/logo.svg">
-    <title>Gestionnaire de notes</title>
+    <title><?php echo t('title')?></title>
 
 </head>
 
@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
                 <!-- Boutons à droite -->
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <a href="./inscription.php"
-                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">S'inscrire</a>
+                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900"><?php echo t('signup')?></a>
                 </div>
             </div>
         </nav>

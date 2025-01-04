@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
+
 ?>
 
 <!doctype html>
@@ -10,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="styles/output.css" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="/assets/logo.svg" />
-    <title>Gestionnaire de notes</title>
+    <title><?php echo t('title')?></title>
 </head>
 
 <body class="flex min-h-screen flex-col divide-y divide-gray-100 mb-8 pb-8 ">
@@ -40,7 +42,7 @@ session_start();
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
                             <a href="./profil.php"
-                                class="rounded-md px-3 py-2 text-sm font-medium hover:text-blue-900">Mon Profil</a>
+                                class="rounded-md px-3 py-2 text-sm font-medium hover:text-blue-900"><?php echo t('myProfile')?></a>
                         </div>
                     </div>
                 </div>
@@ -48,8 +50,7 @@ session_start();
                 <!-- Boutons à droite -->
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <a href="./index.php"
-                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900">Se
-                        déconnecter</a>
+                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900"><?php echo t('logout')?></a>
                 </div>
             </div>
         </nav>
@@ -57,8 +58,7 @@ session_start();
         <!-- Menu Mobile  -->
         <div id="mobile-menu" class="hidden sm:hidden">
             <div class="space-y-1 px-2 pb-3 pt-2">
-                <a href="./profil.php" class="rounded-md px-3 py-2 text-sm font-medium hover:text-blue-900">Mon
-                    Profil</a>
+                <a href="./profil.php" class="rounded-md px-3 py-2 text-sm font-medium hover:text-blue-900"><?php echo t('myProfile')?></a>
             </div>
         </div>
     </header>
@@ -71,18 +71,18 @@ session_start();
         ?>
         <div class="mt-8 p-8 bg-gray-100 rounded-md drop-shadow-lg">
 
-            <h1 class="text-4xl font-bold text-center ">Paramètres</h1>
+            <h1 class="text-4xl font-bold text-center "><?php echo t('settings')?></h1>
 
             <!--Formulaire pour remplir de nouvelles notes-->
             <div class="flex flex-col space-y-12 items-center m-4 p-8" id="gradesForm">
-                <h2 class="text-xl font-bold text-center text-blue-900">Modifier votre profil</h1>
+                <h2 class="text-xl font-bold text-center text-blue-900"><?php echo t('modifyProfile')?></h1>
                     <div class="p-2">
 
                         <form class="" method="POST" action="">
                             <div class="grid md:gap-4 md:grid-cols-2 grid-cols-1 mb-3">
                                 <div>
                                     <label for="firstname" class="mb-3 block text-base font-medium">
-                                        Prénom
+                                    <?php echo t('firstname')?>
                                     </label>
                                     <input value="<?php echo $_SESSION['prenom'] ?>" type="text" name="firstname" id="firstname"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -90,7 +90,7 @@ session_start();
 
                                 <div>
                                     <label for="name" class="mb-3 block text-base font-medium">
-                                        Nom
+                                    <?php echo t('lastname')?>
                                     </label>
                                     <input value="<?php echo $_SESSION['nom'] ?>" type="text" name="name" id="name"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white  text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -98,7 +98,7 @@ session_start();
 
                                 <div>
                                     <label for="school" class="mb-3 block text-base font-medium">
-                                        École
+                                    <?php echo t('school')?>
                                     </label>
                                     <input value="<?php echo $_SESSION['ecole'] ?>" type="text" name="school" id="school"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -106,7 +106,7 @@ session_start();
 
                                 <div>
                                     <label for="sector" class="mb-3 block text-base font-medium">
-                                        Filière
+                                    <?php echo t('field')?>
                                     </label>
                                     <input value="<?php echo $_SESSION['filiere'] ?>" type="text" name="sector"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white  text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -114,14 +114,14 @@ session_start();
 
                                 <div>
                                     <label for="class" class="mb-3 block text-base font-medium">
-                                        Classe
+                                    <?php echo t('class')?>
                                     </label>
                                     <input value="<?php echo $_SESSION['classe'] ?>" type="text" name="class" id="class"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                 </div>
                                 <div>
                                     <label for="language" class="mb-3 block text-base font-medium">
-                                        Langue de préférence
+                                    <?php echo t('prefLanguage')?>
                                     </label>
 
                                     <select name="language" id="language"
@@ -137,14 +137,14 @@ session_start();
                                 </div>
                                 <div>
                                     <label for="email" class="mb-3 block text-base font-medium">
-                                        Adresse mail
+                                    <?php echo t('email')?>
                                     </label>
                                     <input type="email" name="email" value="<?php echo $_SESSION['email'] ?>"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-whitetext-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                 </div>
                                 <div>
                                     <label for="password" class="mb-3 block text-base font-medium">
-                                        Mot de passe
+                                    <?php echo t('password')?>
                                     </label>
                                     <input type="password" name="password"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -153,7 +153,7 @@ session_start();
                             </div>
                             <div class="flex flex-col items-center pt-4">
                                 <button type="submit" name="submit" class="mt-2 mb-3 block py-2 px-6 rounded-full
-                                     hover:bg-black bg-blue-900 text-md text-white font-bold">Modifier</button>
+                                     hover:bg-black bg-blue-900 text-md text-white font-bold"><?php echo t('update')?></button>
                             </div>
                         </form>
                         <?php
@@ -198,7 +198,7 @@ session_start();
                         }
                         ?>
                         <div class="text-sm mt-4 flex flex-col items-center">
-                            <a class="underline" href="./profil.php">Retour au profil</a>
+                            <a class="underline" href="./profil.php"><?php echo t('backProfil')?></a>
                         </div>
                     </div>
             </div>

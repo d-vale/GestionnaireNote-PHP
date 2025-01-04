@@ -1,6 +1,11 @@
 <?php
 return array(
     //Header
+    'title' => "Grade Manager",
+    'myProfile' => "My Profile",
+    'logout' => "Log out",
+    'login' => "Log in",
+    'signup' => "Sign up",
 
     //Footer
     'aboutProject' => "This site is a project carried out as part of a PHP course at HEIG-VD.",
@@ -57,5 +62,11 @@ return array(
     'sortByModuleAndCurs' => "By module and course",
     'sortByBest' => "From best to worst",
     'noNotes' => "No notes have been added",
-    'exportPDF' => "Export to PDF"
+    'exportPDF' => "Export to PDF",
+
+    //Settings page
+    'modifyProfile' => "Modify your profile",
+    'modify' => "Update",
+    'backProfil' => "Back to profile",
+
 );
