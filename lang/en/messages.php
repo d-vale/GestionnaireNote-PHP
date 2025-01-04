@@ -1,5 +1,6 @@
 <?php
 return array(
+    //Header
 
     //Footer
     'aboutProject' => "This site is a project carried out as part of a PHP course at HEIG-VD.",
@@ -31,5 +32,30 @@ return array(
     'english' => "English",
     'email' => "Email address",
     'password' => "Password",
-    'signup' => "Register"
+    'signup' => "Register",
+
+    //Login page
+    'loginTitle' => "Log in",
+    'loginDescription' => "to access your grades and averages.",
+    'login' => "Log in",
+
+    //Profil page
+    'profileTitle' => "Your Profile",
+    'settings' => "Settings",
+    'generalAverage' => "General average",
+    'globalSuccess' => "Overall success rate",
+    'addResult' => "Add a grade",
+    'module' => "Module",
+    'coefficient' => "Coefficient", 
+    'course' => "Class",
+    'result' => "Grade",
+    'evalName' => "Assessment Name",
+    'addResultBtn' => "Add",
+    'delete' => "Delete",
+    'sortResults' => "Sort results",
+    'sortByRecent' => "Most recent",
+    'sortByModuleAndCurs' => "By module and course",
+    'sortByBest' => "From best to worst",
+    'noNotes' => "No notes have been added",
+    'exportPDF' => "Export to PDF"
 );

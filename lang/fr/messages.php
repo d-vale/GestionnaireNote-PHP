@@ -32,5 +32,30 @@ return array(
     'english' => "Anglais",
     'email' => "Adresse mail",
     'password' => "Mot de passe",
-    'signup' => "S'inscrire"
+    'signup' => "S'inscrire",
+
+    //Login page
+    'loginTitle' => "Connectez-vous",
+    'loginDescription' => "Afin d'accéder à vos résultats et vos moyennes.",
+    'login' => "Se connecter",
+
+    //Profil page
+    'profileTitle' => "Votre Profil",
+    'settings' => "Paramètres",
+    'generalAverage' => "Moyenne générale",
+    'globalSuccess' => "Taux de réussite global",
+    'addResult' => "Ajouter un résultat",
+    'module' => "Module",
+    'coefficient' => "Coefficient",
+    'course' => "Cours",
+    'result' => "Résultat",
+    'evalName' => "Nom de l'évaluation",
+    'addResultBtn' => "Ajouter",
+    'delete' => "Supprimer",
+    'sortResults' => "Trier les résultats",
+    'sortByRecent' => "Les plus récents",
+    'sortByModuleAndCurs' => "Par module et cours",
+    'sortByBest' => "Des meilleurs au moins bons",
+    'noNotes' => "Aucune note n'a été ajoutée",
+    'exportPDF' => "Exporter en PDF"
 );

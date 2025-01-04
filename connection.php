@@ -1,9 +1,11 @@
 <?php
 require_once("./config/autoload.php");
+require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
+
 use management\db\DbManager;
 
 $dbManager = new DbManager();
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $dbManager->loginUtilisateur();
 }
 ?>
@@ -68,8 +70,8 @@ if(isset($_POST['submit'])){
     <main class=" flex-grow bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
 
         <div class="mt-24  flex flex-col">
-            <h1 class="pt-6 text-center text-5xl mb-6 font-bold">Connectez-vous !</h1>
-            <p class="pt-6 text-center">Afin d'accéder à vos résultats et vos moyennes. </p>
+            <h1 class="pt-6 text-center text-5xl mb-6 font-bold"><?php echo t('loginTitle') ?></h1>
+            <p class="pt-6 text-center"><?php echo t('loginDescription') ?></p>
         </div>
 
         <!-- Formulaire -->
@@ -80,14 +82,14 @@ if(isset($_POST['submit'])){
                 <div class="grid grid-cols-2 gap-4 md:grid-cols-1" style="margin-bottom:  5rem;">
                     <div>
                         <label for="email" class="mb-3 block text-base font-medium">
-                            Adresse mail
+                            <?php echo t('email') ?>
                         </label>
                         <input type="email" name="email"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                     <div>
                         <label for="password" class="mb-3 block text-base font-medium">
-                            Mot de passe
+                            <?php echo t('password') ?>
                         </label>
                         <input type="password" name="password"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -96,7 +98,7 @@ if(isset($_POST['submit'])){
                 </div>
                 <div class="mt-18">
                     <button type="submit" name="submit" class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">
-                        Se connecter
+                        <?php echo t('login') ?>
                     </button>
                 </div>
 
@@ -138,7 +140,7 @@ if(isset($_POST['submit'])){
                             Langues du site
                         </p>
                         <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                            <?php 
+                            <?php
                             echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=fr" class="hover:opacity-75 hover:text-blue-800">Français</a>';
                             echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=en" class="hover:opacity-75 hover:text-blue-800">Anglais</a>'
                             ?>

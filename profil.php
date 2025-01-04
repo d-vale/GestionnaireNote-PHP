@@ -2,6 +2,7 @@
 //Vérifier si l'utilisateur est connecté et a accès à la page
 session_start();
 require_once("./config/autoload.php");
+require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
 
 use management\db\DbManager;
 use management\db\Notes;
@@ -117,30 +118,30 @@ $_SESSION['sortValue'] = $sortValue;
 
         ?>
         <div class="mt-8 pt-8 bg-gray-100 rounded-md drop-shadow-lg">
-            <h1 class="text-4xl font-bold text-center ">Votre Profil</h1>
+            <h1 class="text-4xl font-bold text-center "><?php echo t('profileTitle')?></h1>
             <div id="profil" class="p-8 flex flex-col items-center gap-8 m-2">
                 <div class="profilBlock grid grid-cols-1 gap-6 text-center items-center">
                     <a href="./settings.php"
                         class="underline row-span-1 rounded-md text-sm font-medium  sm:text-black sm:hover:text-blue-900"
-                        aria-label="Modifier le profil">Paramètres</a>
+                        aria-label="Modifier le profil"><?php echo t('settings')?></a>
                     <div class="data row-span-3">
                         <div class="name text-lg font-bold mb-4 text-blue-900">
                             <?php echo $_SESSION['prenom'] . " " . $_SESSION['nom'] ?>
                         </div>
-                        <div class="school">École : <?php echo $_SESSION['ecole'] ?></div>
-                        <div class="sector">Filière : <?php echo $_SESSION['filiere'] ?></div>
-                        <div class="class">Classe : <?php echo $_SESSION['classe'] ?></div>
-                        <div class="mail">Adresse Mail : <?php echo $_SESSION['email'] ?></div>
+                        <div class="school"><?php echo t('school')?> : <?php echo $_SESSION['ecole'] ?></div>
+                        <div class="sector"><?php echo t('field')?> : <?php echo $_SESSION['filiere'] ?></div>
+                        <div class="class"><?php echo t('class')?> : <?php echo $_SESSION['classe'] ?></div>
+                        <div class="mail"><?php echo t('email')?> : <?php echo $_SESSION['email'] ?></div>
                     </div>
                 </div>
 
                 <div id="averages" class="flex flex-row gap-8 text-center">
                     <div class="averageBlock ">
-                        <div class="averageTitle text-xl font-bold text-blue-900">Moyenne Générale</div>
+                        <div class="averageTitle text-xl font-bold text-blue-900"><?php echo t('generalAverage')?></div>
                         <div class="averageDisplay font-bold text-xl mt-2"><?php echo round($moyenne, 1) ?></div>
                     </div>
                     <div class="averageBlock">
-                        <div class="averageTitle text-xl font-bold text-blue-900">Taux de Réussite Global</div>
+                        <div class="averageTitle text-xl font-bold text-blue-900"><?php echo t('globalSuccess')?></div>
                         <div class="averageDisplay font-bold text-xl mt-2 "><?php echo round($taux, 0) ?>%</div>
                     </div>
                 </div>
@@ -148,29 +149,29 @@ $_SESSION['sortValue'] = $sortValue;
 
             <!--Formulaire pour remplir de nouvelles notes-->
             <div class="flex flex-col space-y-12 items-center mt-4" id="gradesForm">
-                <h2 class="text-xl font-bold text-center">Ajouter un résultat</h1>
+                <h2 class="text-xl font-bold text-center"><?php echo t('addResult')?></h1>
                     <div class="p-2">
                         <form class="" method="POST" action="">
                             <div class="grid md:grid-cols-2 gap-4 font-semibold grid-cols-1">
-                                <label for="module" class="text-center">Module</label>
+                                <label for="module" class="text-center"><?php echo t('module')?></label>
                                 <input type="text" name="module"
                                     class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                                <label for="ratio" class="text-center">Coefficient</label>
+                                <label for="ratio" class="text-center"><?php echo t('coefficient')?></label>
                                 <input type="text" name="ratio"
                                     class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                                <label for="lesson" class="text-center">Cours</label>
+                                <label for="lesson" class="text-center"><?php echo t('course')?></label>
                                 <input type="text" name="lesson"
                                     class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                                <label for="result" class="text-center">Résultat</label>
+                                <label for="result" class="text-center"><?php echo t('result')?></label>
                                 <input type="text" name="result"
                                     class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                                <label for="testName" class="text-center">Nom de l'évaluation</label>
+                                <label for="testName" class="text-center"><?php echo t('evalName')?></label>
                                 <input type="text" name="testName"
                                     class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
                             </div>
                             <div class="flex flex-col items-center pt-4">
                                 <button type="submit" name="submit"
-                                    class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">Ajouter</button>
+                                    class="mt-4 mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold"><?php echo t('addResultBtn')?></button>
                             </div>
                         </form>
                     </div>
@@ -208,13 +209,13 @@ $_SESSION['sortValue'] = $sortValue;
                 <div class="flex flex-col items-center">
                     <div>
                         <label for="sortTypes" class="mb-3 block text-sm font-medium">
-                            Trier les résultats:
+                        <?php echo t('sortResults')?>
                         </label>
                         <select name="sortTypes" id="sortTypes"
                             class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white text-sm outline-none focus:border-[#6A64F1] focus:shadow-md">
-                            <option class="font-light" value="date" <?= $sortValue === 'date' ? 'selected' : '' ?>>Les plus récents</option>
-                            <option value="module" <?= $sortValue === 'module' ? 'selected' : '' ?>>par module et cours</option>
-                            <option value="result" <?= $sortValue === 'result' ? 'selected' : '' ?>>des meilleurs au moins bons</option>
+                            <option class="font-light" value="date" <?= $sortValue === 'date' ? 'selected' : '' ?>><?php echo t('sortByRecent')?></option>
+                            <option value="module" <?= $sortValue === 'module' ? 'selected' : '' ?>><?php echo t('sortByModuleAndCurs')?></option>
+                            <option value="result" <?= $sortValue === 'result' ? 'selected' : '' ?>><?php echo t('sortByBest')?></option>
                         </select>
                     </div>
                     <div class="mt-2">
@@ -236,12 +237,12 @@ $_SESSION['sortValue'] = $sortValue;
                     class="w-full text-md text-left rtl:text-right text-black dark:text-gray-400 m-9 border border-gray-200 shadow-lg">
                     <thead class="bg-blue-900 text-white">
                         <tr>
-                            <th class="px-6 py-3 text-center">Supprimer</th>
-                            <th class="px-6 py-3 text-center">Cours</th>
-                            <th class="px-6 py-3 text-center">Module</th>
-                            <th class="px-6 py-3 text-center">Nom de l'évaluation</th>
-                            <th class="px-6 py-3 text-center">Coefficient</th>
-                            <th class="px-6 py-3 text-center">Résultat</th>
+                            <th class="px-6 py-3 text-center"><?php echo t('delete')?></th>
+                            <th class="px-6 py-3 text-center"><?php echo t('course')?></th>
+                            <th class="px-6 py-3 text-center"><?php echo t('module')?></th>
+                            <th class="px-6 py-3 text-center"><?php echo t('evalName')?></th>
+                            <th class="px-6 py-3 text-center"><?php echo t('coefficient')?></th>
+                            <th class="px-6 py-3 text-center"><?php echo t('result')?></th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 text-black">
@@ -272,7 +273,9 @@ $_SESSION['sortValue'] = $sortValue;
                                 </tr>';
                             }
                         } else {
-                            echo '<tr><td colspan="6" class="px-6 py-4 text-center">Aucune note n\'a été ajoutée</td></tr>';
+                            echo '<tr><td colspan="6" class="px-6 py-4 text-center">';
+                            echo t('noNotes');
+                            echo '</td></tr>';
                         }
                         echo '</tbody>';
                         ?>
@@ -283,7 +286,7 @@ $_SESSION['sortValue'] = $sortValue;
             <div class="flex flex-col items-center pt-2 pb-4">
                 <button type="submit" name="submit"
                     class="mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">
-                    Exporter en PDF
+                    <?php echo t('exportPDF')?>
                 </button>
             </div>
         </form>
