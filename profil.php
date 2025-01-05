@@ -227,7 +227,6 @@ $_SESSION['sortValue'] = $sortValue;
                             try {
                                 $dbManager->creeTableNotes();
                                 $dbManager->ajouteNotes($newNote);
-                                echo '<div class="text-center text-green-500">Note ajoutée avec succès.</div>';
                             } catch (\PDOException $e) {
                                 echo '<div class="text-center text-red-500">Erreur lors de l\'ajout de la note : ' . htmlspecialchars($e->getMessage()) . '</div>';
                             }
@@ -320,7 +319,7 @@ $_SESSION['sortValue'] = $sortValue;
                 </table>
             </div>
         </div>
-        <form action="./generate_pdf.php" method="post">
+        <form action="./generate_pdf.php" method="post" target="_blank">
             <div class="flex flex-col items-center pt-2 pb-4">
                 <button type="submit" name="submit"
                     class="mb-4 block py-2 px-6 rounded-full hover:bg-black bg-blue-900 text-md text-white font-bold">
