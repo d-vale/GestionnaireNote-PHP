@@ -258,7 +258,7 @@ $_SESSION['sortValue'] = $sortValue;
                     <div class="mt-2">
                         <button type="submit" name="applyButton" id="applyButton"
                             class="block text-sm rounded-full bg-blue-900 hover:bg-black text-white p-2">
-                            Appliquer
+                            <?php echo t('apply') ?>
                         </button>
                     </div>
                 </div>

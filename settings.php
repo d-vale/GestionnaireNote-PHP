@@ -82,7 +82,7 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
                             <div class="grid md:gap-4 md:grid-cols-2 grid-cols-1 mb-3">
                                 <div>
                                     <label for="firstname" class="mb-3 block text-base font-medium">
-                                    <?php echo t('firstname')?>
+                                    <?php echo t('firstName')?>
                                     </label>
                                     <input value="<?php echo $_SESSION['prenom'] ?>" type="text" name="firstname" id="firstname"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -90,7 +90,7 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
 
                                 <div>
                                     <label for="name" class="mb-3 block text-base font-medium">
-                                    <?php echo t('lastname')?>
+                                    <?php echo t('lastName')?>
                                     </label>
                                     <input value="<?php echo $_SESSION['nom'] ?>" type="text" name="name" id="name"
                                         class="shadow-lg rounded-md border border-[#e0e0e0] bg-white  text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -153,7 +153,7 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
                             </div>
                             <div class="flex flex-col items-center pt-4">
                                 <button type="submit" name="submit" class="mt-2 mb-3 block py-2 px-6 rounded-full
-                                     hover:bg-black bg-blue-900 text-md text-white font-bold"><?php echo t('update')?></button>
+                                     hover:bg-black bg-blue-900 text-md text-white font-bold"><?php echo t('modify')?></button>
                             </div>
                         </form>
                         <?php

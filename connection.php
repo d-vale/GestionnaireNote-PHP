@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once("./config/autoload.php");
 require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
 

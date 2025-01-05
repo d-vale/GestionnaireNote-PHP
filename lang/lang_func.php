@@ -37,7 +37,7 @@ function getLanguage($defaultLanguage = 'fr')
     } else {
         $language = getLanguageFromBrowser($defaultLanguage);
     }
-
+    
     // If the language given to us is not in our list of supported languages, use the default language.
     if (!isset($language) || !in_array($language, getSupportedLanguages())) {
         $language = $defaultLanguage;

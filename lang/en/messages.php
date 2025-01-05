@@ -63,6 +63,9 @@ return array(
     'sortByBest' => "From best to worst",
     'noNotes' => "No notes have been added",
     'exportPDF' => "Export to PDF",
+    'apply' => "Apply",
+
+
 
     //Settings page
     'modifyProfile' => "Modify your profile",

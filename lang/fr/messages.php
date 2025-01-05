@@ -63,6 +63,7 @@ return array(
     'sortByBest' => "Des meilleurs au moins bons",
     'noNotes' => "Aucune note n'a été ajoutée",
     'exportPDF' => "Exporter en PDF",
+    'apply' => "Appliquer",
 
     //Settings page
     'modifyProfile' => "Modifier votre profil",
