@@ -93,7 +93,6 @@ COMMANDE_SQL;
         $sql = "INSERT INTO utilisateurs (prenom, nom, email, ecole, filiere, classe, langue, password, token, verify) VALUES "
             . "(:prenom, :nom, :email, :ecole, :filiere, :classe, :langue, :password, :token, :verify);";
         $this->db->prepare($sql)->execute($datas);
-        echo '<p style="color: green" class="mt-3 text-center">Utilisateur ajouté</p>';
 
         // Envoie du mail de vérification du mail avec le token personnalisé dans le lien
         include('./management/mail/MailSender_Manager.php');
@@ -284,13 +283,13 @@ COMMANDE_SQL;
                     $_SESSION['id'] = $result['id'];
                     header("Location: profil.php");
                 } else {
-                    echo '<p style="color: red" class="mt-3 text-center">Email ou mot de passe incorrect</p>';
+                    echo '<p style="color: red" class="mt-3 text-center">Identifiants incorrects ou compte non vérifié.</p>';
                 }
             } else {
-                echo '<p style="color: red" class="mt-3 text-center">Erreur de connexion</p>';
+                echo '<p style="color: red" class="mt-3 text-center">Erreur lors de la requête à la base de données.</p>';
             }
         } else {
-            echo '<p style="color: red" class="mt-3 text-center">Email ou mot de passe incorrect</p>';
+            echo '<p style="color: red" class="mt-3 text-center">Email ou mot de passe non valide.</p>';
         }
     }
 
@@ -441,5 +440,14 @@ COMMANDE_SQL;
         $stmt->execute();
         $data = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $data ? (int) $data['id'] : 0;
+    }
+
+    public function emailExiste(string $email): bool
+    {
+        $sql = "SELECT COUNT(*) FROM utilisateurs WHERE email = :email";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':email', $email, \PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
     }
 }

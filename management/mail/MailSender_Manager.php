@@ -9,13 +9,21 @@ use Symfony\Component\Mime\Email;
 $transport = Transport::fromDsn('smtp://localhost:1025');
 $mailer = new Mailer($transport);
 $email = (new Email())
-    ->from('heig@gesionaire.ch')
+    ->from('heig@gestionnaire.ch')
     ->to($utilisateur->rendEmail())
     ->subject('Vérification de votre compte')
-    ->html('<h1>Merci de vérifier votre compte</h1>
+    ->html('
+    <div style="font-family: Arial, sans-serif; text-align: center;">
+        <h1 style="color: #333;">Merci de vérifier votre compte</h1>
+        <p style="color: #555;">
             <a href="http://localhost/ProgServ2/GestionnaireNote-PHP/verify.php?token='
-            . $utilisateur->rendToken()
-            . '">Cliquez ici pour vérifier votre compte</a>');
+        . $utilisateur->rendToken()
+        . '" style="color: #0066cc; text-decoration: none;">
+                Cliquez ici pour vérifier votre compte
+            </a>
+        </p>
+    </div>
+');
 $result = $mailer->send($email);
 
 //Verification de l'envoi du mail

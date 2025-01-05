@@ -7,20 +7,6 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
 use management\db\DbManager;
 use management\db\Notes;
 
-$dbManager = new DbManager();
-
-if (isset($_SESSION['id'])) {
-    $moyenne = $dbManager->rendMoyenneUtilisateur($_SESSION['id']);
-    $taux = $dbManager->rendTauxUtilisateur($_SESSION['id']);
-}
-
-//Traitement du filtrage des données à afficher, par défaut par date
-if (isset($_POST['sortTypes'])) {
-    $sortValue = $_POST['sortTypes'];
-} else {
-    $sortValue = "date";
-}
-$_SESSION['sortValue'] = $sortValue;
 ?>
 
 <!DOCTYPE html>
@@ -62,6 +48,7 @@ $_SESSION['sortValue'] = $sortValue;
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <?php
+
                         //Vérifier si l'utilisateur est connecté et a accès à la page
 
                         if (!isset($_SESSION['email'])) {

@@ -10,7 +10,7 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles/output.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/assets/logo.svg">
-    <title><?php echo t('title')?></title>
+    <title><?php echo t('title') ?></title>
 
 </head>
 
@@ -46,7 +46,7 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
                 <!-- Boutons à droite -->
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <a href="./connection.php"
-                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900"><?php echo t('login')?></a>
+                        class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-blue-900"><?php echo t('login') ?></a>
                 </div>
             </div>
         </nav>
@@ -114,24 +114,25 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
                     </div>
                     <div>
                         <label for="language" class="mb-3 block text-base font-medium">
-                            <?php echo t('prefLanguage') ?> 
+                            <?php echo t('prefLanguage') ?>
                         </label>
-                        <select name="language" id="language" class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                            <option class="font-light" selected><?php echo t('chooseLang')?></option>
-                            <option value="french"><?php echo t('french')?></option>
-                            <option value="english"><?php echo t('english')?></option>
+                        <select name="language" id="language"
+                            class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
+                            <option class="font-light" selected><?php echo t('chooseLang') ?></option>
+                            <option value="french"><?php echo t('french') ?></option>
+                            <option value="english"><?php echo t('english') ?></option>
                         </select>
                     </div>
                     <div>
                         <label for="email" class="mb-3 block text-base font-medium">
-                        <?php echo t('email')?>
+                            <?php echo t('email') ?>
                         </label>
                         <input type="email" name="email"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-whitetext-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                     <div>
                         <label for="password" class="mb-3 block text-base font-medium">
-                        <?php echo t('password')?>
+                            <?php echo t('password') ?>
                         </label>
                         <input type="password" name="password"
                             class="shadow-lg rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md" />
@@ -141,7 +142,7 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
                 <div class="mt-18">
                     <button id="subscribe"
                         class="block text-basme font-medium rounded-full bg-blue-900 hover:bg-black text-lg text-white p-3">
-                        <?php echo t('signup')?>
+                        <?php echo t('signup') ?>
                     </button>
                 </div>
 
@@ -157,22 +158,76 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
             $db = new DbManager();
             $db->creeTableUtilisateur();
 
-            if (isset($_POST['firstname']) && isset($_POST['name']) && isset($_POST['school']) && isset($_POST['sector']) && isset($_POST['class']) && isset($_POST['language']) && isset($_POST['email']) && isset($_POST['password'])) {
-                $firstname = $_POST['firstname'];
-                $name = $_POST['name'];
-                $school = $_POST['school'];
-                $sector = $_POST['sector'];
-                $class = $_POST['class'];
-                $language = $_POST['language'];
-                $email = $_POST['email'];
-                $password = $_POST['password'];
-                $password = password_hash($password, PASSWORD_DEFAULT);
-                $token = bin2hex(random_bytes(32));
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // Liste des champs requis
+                $champsRequis = [
+                    'firstname' => 'Prénom',
+                    'name' => 'Nom',
+                    'school' => 'École',
+                    'sector' => 'Secteur',
+                    'class' => 'Classe',
+                    'language' => 'Langue',
+                    'email' => 'Adresse email',
+                    'password' => 'Mot de passe'
+                ];
+                $erreurs = [];
 
-                $utilisateur = new Utilisateur($firstname, $name, $email, $school, $sector, $class, $password, $token, false, $language);
-                $db->ajouteUtilisateur($utilisateur);
+                // Vérification que tous les champs sont remplis
+                foreach ($champsRequis as $champ => $nomChamp) {
+                    if (empty($_POST[$champ])) {
+                        $erreurs[] = "Le champ \"$nomChamp\" est obligatoire.";
+                    }
+                }
+
+                // Validation supplémentaire pour l'email
+                if (!empty($_POST['email']) && !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                    $erreurs[] = "L'adresse email saisie n'est pas valide.";
+                }
+
+                // Vérifier si l'email existe déjà dans la base de données
+                if (empty($erreurs)) {
+                    $email = $_POST['email'];
+                    try {
+                        $existe = $db->emailExiste($email); // Méthode pour vérifier si l'email est déjà présent
+                        if ($existe) {
+                            $erreurs[] = "L'adresse email \"$email\" est déjà utilisée.";
+                        }
+                    } catch (Exception $e) {
+                        $erreurs[] = "Une erreur est survenue lors de la vérification de l'email : " . htmlspecialchars($e->getMessage());
+                    }
+                }
+
+                // Si des erreurs sont détectées, les afficher
+                if (!empty($erreurs)) {
+                    foreach ($erreurs as $erreur) {
+                        echo '<p style="color: red" class="mt-3 text-center">' . htmlspecialchars($erreur) . '</p>';
+                    }
+                } else {
+                    // Si aucune erreur, traitement des données
+                    $firstname = $_POST['firstname'];
+                    $name = $_POST['name'];
+                    $school = $_POST['school'];
+                    $sector = $_POST['sector'];
+                    $class = $_POST['class'];
+                    $language = $_POST['language'];
+                    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                    $token = bin2hex(random_bytes(32));
+
+                    try {
+                        // Création de l'utilisateur
+                        $utilisateur = new Utilisateur($firstname, $name, $email, $school, $sector, $class, $password, $token, false, $language);
+                        $db->ajouteUtilisateur($utilisateur);
+
+                        // Confirmation de la création
+                        echo '<p style="color: green" class="mt-3 text-center">Utilisateur créé avec succès.</p>';
+                    } catch (Exception $e) {
+                        echo '<p style="color: red" class="mt-3 text-center">Une erreur est survenue lors de la création de l\'utilisateur : ' . htmlspecialchars($e->getMessage()) . '</p>';
+                    }
+                }
             }
             ?>
+
+
         </div>
 
     </main>
@@ -188,7 +243,7 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
                         <img src="./assets/logo2.svg" class="mr-5 h-6 sm:h-9" alt="Projet PHP" />
                     </a>
                     <p class="max-w-xs mt-4 text-sm text-gray-600">
-                    <?php echo t('aboutProject')?>
+                        <?php echo t('aboutProject') ?>
                     </p>
                     <div class="flex mt-8 space-x-6 text-gray-600">
                         <a class="hover:opacity-75 hover:text-blue-800"
@@ -207,10 +262,10 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
                 <div class="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <p class="font-medium">
-                        <?php echo t('siteLanguages')?>
+                            <?php echo t('siteLanguages') ?>
                         </p>
                         <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                            <?php 
+                            <?php
                             echo '<a href="' . $_SERVER['PHP_SELF'] . '?lang=fr" class="hover:opacity-75 hover:text-blue-800">';
                             echo t('french');
                             echo '</a>';
