@@ -9,10 +9,12 @@ use \management\db\DbManager;
 use \ch\comem\I_ApiCRUD;
 use \ch\comem\Personne;
 
+//on récupère les variables de session pour les mettre dans le pdf
 $nom = $_SESSION['nom'];
 $sortValue = $_SESSION['sortValue'];
 $db = new DbManager();
 
+//si un utilisateur est connecté, on peut créer son pdf
 if($_SESSION['id']) {
     $tableauNote = $db->rendNotesTriees($_SESSION["id"], $sortValue);
 
@@ -25,6 +27,7 @@ if($_SESSION['id']) {
     $hour = date_create('+1 hour')->format(format: 'H:i');
 
 
+    //on crée l'objet pdf dans lequel on ajoute du contenu
     $pdf = new FPDF();
     $pdf->SetTitle($titre, true);
     $pdf->AddPage();
@@ -47,6 +50,8 @@ if($_SESSION['id']) {
     $pdf->Ln();
 
     $pdf->SetFont('Arial','',10);
+
+    //on génère le tableau de notes
     foreach($tableauNote as $note) {
         $module = $note->rendModule();
         $cours = $note->rendNomCours();
