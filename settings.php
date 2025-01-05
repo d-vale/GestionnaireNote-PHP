@@ -2,7 +2,46 @@
 session_start();
 require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
 
-?>
+                        require_once("./config/autoload.php");
+
+                        use management\db\DbManager;
+                        use management\db\Utilisateur;
+
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+
+                            $dbManager = new DbManager();
+
+                            $password = $_POST['password'];
+                            $password = password_hash($password, PASSWORD_DEFAULT);
+
+                            $utilisateur = new Utilisateur(
+                                $_POST['firstname'],
+                                $_POST['name'],
+                                $_POST['email'],
+                                $_POST['school'],
+                                $_POST['sector'],
+                                $_POST['class'],
+                                $password,
+                                $_POST['language']
+                            );
+
+                            $utilisateur->definiId($_SESSION['id']);
+
+                            if ($dbManager->modifieUtilisateur($utilisateur)) {
+                                $_SESSION['prenom'] = $_POST['firstname'];
+                                $_SESSION['nom'] = $_POST['name'];
+                                $_SESSION['email'] = $_POST['email'];
+                                $_SESSION['ecole'] = $_POST['school'];
+                                $_SESSION['filiere'] = $_POST['sector'];
+                                $_SESSION['classe'] = $_POST['class'];
+                                $_SESSION['LANG'] = $_POST['language'];
+                                echo '<p style="color: green" class="mt-3 text-center">Profil mis à jour avec succès</p>';
+                            } else {
+                                echo '<p style="color: red" class="mt-3 text-center">Erreur lors de la mise à jour du profil</p>';
+                            }
+                        }
+                        ?>
 
 <!doctype html>
 <html lang="fr">
@@ -126,12 +165,12 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
 
                                     <select name="language" id="language"
                                         class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
-                                        <?php if ($_SESSION['langue'] === "french") {
-                                            echo '<option value="french" selected>Français</option>';
-                                            echo '<option value="english">Anglais</option>';
+                                        <?php if ($_SESSION['LANG'] === "fr") {
+                                            echo '<option value="fr" selected>Français</option>';
+                                            echo '<option value="en">Anglais</option>';
                                         } else {
-                                            echo '<option value="french">Français</option>';
-                                            echo '<option value="english" selected>Anglais</option>';
+                                            echo '<option value="fr">French</option>';
+                                            echo '<option value="en" selected>English</option>';
                                         } ?>
                                     </select>
                                 </div>
@@ -156,47 +195,7 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
                                      hover:bg-black bg-blue-900 text-md text-white font-bold"><?php echo t('modify')?></button>
                             </div>
                         </form>
-                        <?php
-                        require_once("./config/autoload.php");
-
-                        use management\db\DbManager;
-                        use management\db\Utilisateur;
-
-                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-
-                            $dbManager = new DbManager();
-
-                            $password = $_POST['password'];
-                            $password = password_hash($password, PASSWORD_DEFAULT);
-
-                            $utilisateur = new Utilisateur(
-                                $_POST['firstname'],
-                                $_POST['name'],
-                                $_POST['email'],
-                                $_POST['school'],
-                                $_POST['sector'],
-                                $_POST['class'],
-                                $password,
-                                $_POST['language']
-                            );
-
-                            $utilisateur->definiId($_SESSION['id']);
-
-                            if ($dbManager->modifieUtilisateur($utilisateur)) {
-                                $_SESSION['prenom'] = $_POST['firstname'];
-                                $_SESSION['nom'] = $_POST['name'];
-                                $_SESSION['email'] = $_POST['email'];
-                                $_SESSION['ecole'] = $_POST['school'];
-                                $_SESSION['filiere'] = $_POST['sector'];
-                                $_SESSION['classe'] = $_POST['class'];
-                                $_SESSION['langue'] = $_POST['language'];
-                                echo '<p style="color: green" class="mt-3 text-center">Profil mis à jour avec succès</p>';
-                            } else {
-                                echo '<p style="color: red" class="mt-3 text-center">Erreur lors de la mise à jour du profil</p>';
-                            }
-                        }
-                        ?>
+                
                         <div class="text-sm mt-4 flex flex-col items-center">
                             <a class="underline" href="./profil.php"><?php echo t('backProfil')?></a>
                         </div>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -119,8 +120,8 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
                         <select name="language" id="language"
                             class="shadow-lg form-select rounded-md border border-[#e0e0e0] bg-white text-base  outline-none focus:border-[#6A64F1] focus:shadow-md">
                             <option class="font-light" selected><?php echo t('chooseLang') ?></option>
-                            <option value="french"><?php echo t('french') ?></option>
-                            <option value="english"><?php echo t('english') ?></option>
+                            <option value="fr"><?php echo t('french') ?></option>
+                            <option value="en"><?php echo t('english') ?></option>
                         </select>
                     </div>
                     <div>

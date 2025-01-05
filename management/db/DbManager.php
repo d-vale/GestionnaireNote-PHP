@@ -94,6 +94,7 @@ COMMANDE_SQL;
             . "(:prenom, :nom, :email, :ecole, :filiere, :classe, :langue, :password, :token, :verify);";
         $this->db->prepare($sql)->execute($datas);
 
+
         // Envoie du mail de vérification du mail avec le token personnalisé dans le lien
         include('./management/mail/MailSender_Manager.php');
 
@@ -278,7 +279,7 @@ COMMANDE_SQL;
                     $_SESSION['ecole'] = $result['ecole'];
                     $_SESSION['filiere'] = $result['filiere'];
                     $_SESSION['classe'] = $result['classe'];
-                    $_SESSION['langue'] = $result['langue'];
+                    $_SESSION['LANG'] = $result['langue'];
                     $_SESSION['id'] = $result['id'];
                     header("Location: profil.php");
                 } else {
