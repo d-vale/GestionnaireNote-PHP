@@ -205,8 +205,8 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
                     }
                 } else {
                     // Si aucune erreur, traitement des données
-                    $firstname = $_POST['firstname'];
-                    $name = $_POST['name'];
+                    $firstname = filter_input(INPUT_POST, 'firstname', FILTER_VALIDATE_REGEXP, ["options" => ["regexp" => "/^[A-ZÇÉÈÊËÀÂÎÏÔÙÛ]{1}([a-zçéèêëàâîïôùû]+|([a-zçéèêëàâîïôùû]+-[A-ZÇÉÈÊËÀÂÎÏÔÙÛ]{1}[a-zçéèêëàâîïôùû]+)){1,19}$/"]]);
+                    $name = filter_input(INPUT_POST, 'name', FILTER_VALIDATE_REGEXP, ["options" => ["regexp" => "/^[A-ZÇÉÈÊËÀÂÎÏÔÙÛ]{1}([a-zçéèêëàâîïôùû]+|([a-zçéèêëàâîïôùû]+-[A-ZÇÉÈÊËÀÂÎÏÔÙÛ]{1}[a-zçéèêëàâîïôùû]+)){1,19}$/"]]);
                     $school = $_POST['school'];
                     $sector = $_POST['sector'];
                     $class = $_POST['class'];

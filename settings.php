@@ -16,9 +16,9 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
                             $password = password_hash($password, PASSWORD_DEFAULT);
 
                             $utilisateur = new Utilisateur(
-                                $_POST['firstname'],
-                                $_POST['name'],
-                                $_POST['email'],
+                                filter_input(INPUT_POST, 'firstname', FILTER_VALIDATE_REGEXP, ["options" => ["regexp" => "/^[A-ZÇÉÈÊËÀÂÎÏÔÙÛ]{1}([a-zçéèêëàâîïôùû]+|([a-zçéèêëàâîïôùû]+-[A-ZÇÉÈÊËÀÂÎÏÔÙÛ]{1}[a-zçéèêëàâîïôùû]+)){1,19}$/"]]),
+                                filter_input(INPUT_POST, 'name', FILTER_VALIDATE_REGEXP, ["options" => ["regexp" => "/^[A-ZÇÉÈÊËÀÂÎÏÔÙÛ]{1}([a-zçéèêëàâîïôùû]+|([a-zçéèêëàâîïôùû]+-[A-ZÇÉÈÊËÀÂÎÏÔÙÛ]{1}[a-zçéèêëàâîïôùû]+)){1,19}$/"]]),
+                                filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL),
                                 $_POST['school'],
                                 $_POST['sector'],
                                 $_POST['class'],
@@ -29,9 +29,9 @@ require_once('lang' . DIRECTORY_SEPARATOR . 'lang_func.php');
                             $utilisateur->definiId($_SESSION['id']);
 
                             if ($dbManager->modifieUtilisateur($utilisateur)) {
-                                $_SESSION['prenom'] = $_POST['firstname'];
-                                $_SESSION['nom'] = $_POST['name'];
-                                $_SESSION['email'] = $_POST['email'];
+                                $_SESSION['prenom'] = filter_input(INPUT_POST, 'firstname', FILTER_VALIDATE_REGEXP, ["options" => ["regexp" => "/^[A-ZÇÉÈÊËÀÂÎÏÔÙÛ]{1}([a-zçéèêëàâîïôùû]+|([a-zçéèêëàâîïôùû]+-[A-ZÇÉÈÊËÀÂÎÏÔÙÛ]{1}[a-zçéèêëàâîïôùû]+)){1,19}$/"]]);
+                                $_SESSION['nom'] = filter_input(INPUT_POST, 'name', FILTER_VALIDATE_REGEXP, ["options" => ["regexp" => "/^[A-ZÇÉÈÊËÀÂÎÏÔÙÛ]{1}([a-zçéèêëàâîïôùû]+|([a-zçéèêëàâîïôùû]+-[A-ZÇÉÈÊËÀÂÎÏÔÙÛ]{1}[a-zçéèêëàâîïôùû]+)){1,19}$/"]]);
+                                $_SESSION['email'] = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
                                 $_SESSION['ecole'] = $_POST['school'];
                                 $_SESSION['filiere'] = $_POST['sector'];
                                 $_SESSION['classe'] = $_POST['class'];
