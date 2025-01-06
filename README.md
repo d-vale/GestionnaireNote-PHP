@@ -15,3 +15,4 @@ Technologies Used
     Tailwind CSS
     FPDF
     SQLITE
+    MailHog
